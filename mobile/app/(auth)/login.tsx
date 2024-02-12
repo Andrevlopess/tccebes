@@ -6,6 +6,7 @@ import {
   Button,
   Pressable,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/hooks/useAuth";
@@ -13,8 +14,9 @@ import { AuthError } from "@supabase/supabase-js";
 import PasswordInput from "@/components/ui/PasswordInput";
 import LabelInput from "@/components/ui/LabelInput";
 import { s } from "@/styles/globals";
-import { Link } from "expo-router";
-import { Loader2 } from "lucide-react-native";
+import { Link, useRouter } from "expo-router";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react-native";
+import Logo from "@/assets/icons/Logo";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -28,11 +30,13 @@ AppState.addEventListener("change", (state) => {
   }
 });
 
-export default function Auth() {
+export default function LoginPage() {
   const [email, setEmail] = useState("andre.vitor@anchieta.br");
   const [password, setPassword] = useState("andrevlopes__");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<AuthError | null>(null);
+
+  const router = useRouter();
 
   const { signInWithEmail, signUpWithEmail } = useAuth();
 
@@ -69,8 +73,63 @@ export default function Auth() {
   }
 
   return (
-    <View style={[s.flex1, s.p20, s.justifyCenter]}>
-      {error && (
+    <View style={[s.container, s.py36, s.gap60]}>
+      <Pressable onPress={router.back}>
+        <ArrowLeft />
+      </Pressable>
+
+      <View style={[s.flex1, s.gap46]}>
+        <View style={[s.flexColumn, s.gap16, s.itemsCenter, s.justifyCenter]}>
+          <Logo />
+          <Text style={[s.semibold]}>
+            Entre na sua conta e acesse seus treinos
+          </Text>
+        </View>
+
+        <View style={[s.gap16, s.mt24]}>
+          <View style={[s.p18, s.radius6, s.bgGray100]}>
+            <LabelInput
+              label="Email"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+              placeholder="email"
+              autoCapitalize={"none"}
+            />
+          </View>
+
+          <View style={[s.p18, s.radius6, s.bgGray100]}>
+            <PasswordInput
+              label="Senha"
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+              placeholder="Insira sua senha"
+              autoCapitalize={"none"}
+            />
+          </View>
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={[
+              s.mt12,
+              s.bgViolet700,
+              s.radius12,
+              s.itemsCenter,
+              s.justifyCenter,
+              s.p14,
+            ]}
+            disabled={loading}
+            onPress={() => handleSignIn()}
+          >
+            {loading ? (
+              <ActivityIndicator color={"#fff"} />
+            ) : (
+              <Text style={[s.regular, s.textNeutral50]}>Entrar</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* {error && (
         <View
           style={{
             borderRadius: 12,
@@ -81,12 +140,9 @@ export default function Auth() {
         >
           <Text>{error.message}</Text>
         </View>
-      )}
+      )} */}
 
-      <Text style={[s.text2XL, s.bold, s.px4]}>
-        Faça seu login e acesse seus treinos
-      </Text>
-
+      {/* 
       <View style={[s.p18, s.radius6, s.bgGray100, s.mt24]}>
         <LabelInput
           label="Email"
@@ -124,7 +180,7 @@ export default function Auth() {
         ) : (
           <Text style={[s.regular, s.textNeutral50]}>Entrar</Text>
         )}
-      </Pressable>
+      </Pressable> */}
 
       {/* <Pressable
         style={[
@@ -142,7 +198,7 @@ export default function Auth() {
         <Text style={[s.regular, s.textNeutral50]}>Sign in</Text>
       </Pressable> */}
 
-      <Text style={[s.textCenter, s.textGray500, s.semibold, s.mt24]}>
+      {/* <Text style={[s.textCenter, s.textGray500, s.semibold, s.mt24]}>
         Ainda não tem uma conta?
         <Link
           href="/(auth)/signin"
@@ -156,7 +212,7 @@ export default function Auth() {
         >
           Criar
         </Link>
-      </Text>
+      </Text> */}
     </View>
   );
 }

@@ -14,6 +14,7 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 import { useCallback } from "react";
+import { SafeAreaView } from "react-native";
 
 export default function RootLayout() {
   let [fontsLoaded, fontError] = useFonts({
@@ -40,16 +41,9 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-      <Slot />
+     
+        <Slot />
+
     </AuthProvider>
   );
 }
-
-// {session && session.user ? (
-//   <Account
-//     key={session.user.id}
-//     session={session}
-//   />
-// ) : (
-//   <Auth />
-// )}

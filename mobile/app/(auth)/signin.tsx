@@ -13,7 +13,9 @@ import { AuthError } from "@supabase/supabase-js";
 import PasswordInput from "@/components/ui/PasswordInput";
 import LabelInput from "@/components/ui/LabelInput";
 import { s } from "@/styles/globals";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import { ArrowLeft } from "lucide-react-native";
+import Logo from "@/assets/icons/Logo";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -36,6 +38,8 @@ export default function Auth() {
 
   const { signUpWithEmail } = useAuth();
 
+  const router = useRouter();
+
   async function handleSignUp() {
     try {
       setLoading(true);
@@ -53,90 +57,71 @@ export default function Auth() {
   }
 
   return (
-    <View style={[s.flex1, s.p20, s.justifyCenter]}>
-      {error && (
-        <View
-          style={{
-            borderRadius: 12,
-            borderColor: "red",
-            padding: 10,
-            borderWidth: 2,
-          }}
-        >
-          <Text>{error.message}</Text>
-        </View>
-      )}
-
-      <Text style={[s.text2XL, s.bold, s.px4]}>
-        Crie sua conta e melhore seus treinos
-      </Text>
-
-      <View style={[s.p18, s.radius6, s.bgGray100, s.mt24]}>
-        <LabelInput
-          label="Nome"
-          onChangeText={(text) => setName(text)}
-          value={name}
-          placeholder="name"
-          autoCapitalize={"none"}
-        />
-      </View>
-
-      <View style={[s.p18, s.radius6, s.bgGray100, s.mt12]}>
-        <LabelInput
-          label="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email"
-          autoCapitalize={"none"}
-        />
-      </View>
-
-      <View style={[s.p18, s.radius6, s.bgGray100, s.mt12]}>
-        <PasswordInput
-          label="Senha"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          placeholder="Insira sua senha"
-          autoCapitalize={"none"}
-        />
-      </View>
-
-      <Pressable
-        style={[
-          s.mt18,
-          s.bgViolet800,
-          s.radius12,
-          s.itemsCenter,
-          s.justifyCenter,
-          s.p14,
-        ]}
-        disabled={loading}
-        onPress={() => handleSignUp()}
-      >
-        {loading ? (
-          <ActivityIndicator color={"#fff"} />
-        ) : (
-          <Text style={[s.regular, s.textNeutral50, s.semibold]}>
-            Cadastrar
-          </Text>
-        )}
+    <View style={[s.container, s.py36, s.gap60]}>
+      <Pressable onPress={router.back}>
+        <ArrowLeft />
       </Pressable>
 
-      <Text style={[s.textCenter, s.textGray500, s.bold, s.mt24]}>
-        Já tem uma conta?
-        <Link
-          href="/(auth)/login"
-          style={[
-            s.textCenter,
-            s.textViolet700,
-            s.bold,
-            s.textUnderline,
-            s.px4,
-          ]}
-        >
-          Entrar
-        </Link>
-      </Text>
+      <View style={[s.flex1, s.gap46]}>
+        <View style={[s.flexColumn, s.gap16, s.itemsCenter, s.justifyCenter]}>
+          <Logo />
+          <Text style={[s.semibold]}>
+            Entre na sua conta e acesse seus treinos
+          </Text>
+        </View>
+
+        <View style={[s.gap16, s.mt24]}>
+
+          <View style={[s.p18, s.radius6, s.bgGray100]}>
+            <LabelInput
+              label="Nome"
+              onChangeText={(text) => setName(text)}
+              value={name}
+              placeholder="name"
+              autoCapitalize={"none"}
+            />
+          </View>
+
+          <View style={[s.p18, s.radius6, s.bgGray100]}>
+            <LabelInput
+              label="Email"
+              onChangeText={(text) => setEmail(text)}
+              value={email}
+              placeholder="email"
+              autoCapitalize={"none"}
+            />
+          </View>
+
+          <View style={[s.p18, s.radius6, s.bgGray100]}>
+            <PasswordInput
+              label="Senha"
+              onChangeText={(text) => setPassword(text)}
+              value={password}
+              placeholder="Insira sua senha"
+              autoCapitalize={"none"}
+            />
+          </View>
+
+          <Pressable
+            style={[
+              s.mt12,
+              s.bgViolet700,
+              s.radius12,
+              s.itemsCenter,
+              s.justifyCenter,
+              s.p14,
+            ]}
+            disabled={loading}
+            onPress={() => handleSignUp()}
+          >
+            {loading ? (
+              <ActivityIndicator color={"#fff"} />
+            ) : (
+              <Text style={[s.regular, s.textNeutral50]}>Entrar</Text>
+            )}
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 }

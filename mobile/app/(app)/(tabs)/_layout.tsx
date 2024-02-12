@@ -1,27 +1,57 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Home, Settings } from "lucide-react-native";
+import TabHome from "@/assets/icons/TabHome";
+import TabAccount from "@/assets/icons/TabAccount";
+import TabLibrary from "@/assets/icons/TabLibrary";
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs  initialRouteName="home" sceneContainerStyle={{}}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           headerShown: false,
           title: "Home",
           tabBarShowLabel: false,
-          tabBarIcon: (({color}) => <Home color={color}/>),
-
+          tabBarActiveTintColor: "#7c3aed",
+          tabBarIcon: ({ color, focused }) => (
+            <TabHome
+              color={color}
+              focused={focused}
+            />
+          ),
         }}
       />
+
       <Tabs.Screen
-        name="settings"
+        name="library"
         options={{
           headerShown: false,
-          title: "Settings",
+          title: "Library",
           tabBarShowLabel: false,
-          tabBarIcon: (({color}) => <Settings color={color}/>),
+          tabBarActiveTintColor: "#7c3aed",
+          tabBarIcon: ({ color, focused }) => (
+            <TabLibrary
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="account"
+        options={{
+          tabBarActiveTintColor: "#7c3aed",
+          headerShown: false,
+          title: "Account",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabAccount
+              color={color}
+              focused={focused}
+            />
+          ),
         }}
       />
     </Tabs>

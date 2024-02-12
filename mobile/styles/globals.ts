@@ -987,97 +987,97 @@ export const s = StyleSheet.create({
 
   // Gap
   gap0: {
-    margin: 0,
+    gap: 0,
   },
   gap2: {
-    margin: 2,
+    gap: 2,
   },
   gap4: {
-    margin: 4,
+    gap: 4,
   },
   gap6: {
-    margin: 6,
+    gap: 6,
   },
   gap8: {
-    margin: 8,
+    gap: 8,
   },
   gap10: {
-    margin: 10,
+    gap: 10,
   },
   gap12: {
-    margin: 12,
+    gap: 12,
   },
   gap14: {
-    margin: 14,
+    gap: 14,
   },
   gap16: {
-    margin: 16,
+    gap: 16,
   },
   gap18: {
-    margin: 18,
+    gap: 18,
   },
   gap20: {
-    margin: 20,
+    gap: 20,
   },
   gap22: {
-    margin: 22,
+    gap: 22,
   },
   gap24: {
-    margin: 24,
+    gap: 24,
   },
   gap26: {
-    margin: 26,
+    gap: 26,
   },
   gap28: {
-    margin: 28,
+    gap: 28,
   },
   gap30: {
-    margin: 30,
+    gap: 30,
   },
   gap32: {
-    margin: 32,
+    gap: 32,
   },
   gap34: {
-    margin: 34,
+    gap: 34,
   },
   gap36: {
-    margin: 36,
+    gap: 36,
   },
   gap38: {
-    margin: 38,
+    gap: 38,
   },
   gap40: {
-    margin: 40,
+    gap: 40,
   },
   gap42: {
-    margin: 42,
+    gap: 42,
   },
   gap44: {
-    margin: 44,
+    gap: 44,
   },
   gap46: {
-    margin: 46,
+    gap: 46,
   },
   gap48: {
-    margin: 48,
+    gap: 48,
   },
   gap50: {
-    margin: 50,
+    gap: 50,
   },
   gap52: {
-    margin: 52,
+    gap: 52,
   },
   gap54: {
-    margin: 54,
+    gap: 54,
   },
   gap56: {
-    margin: 56,
+    gap: 56,
   },
   gap58: {
-    margin: 58,
+    gap: 58,
   },
   gap60: {
-    margin: 60,
+    gap: 60,
   },
 
   // Text
@@ -1109,6 +1109,15 @@ export const s = StyleSheet.create({
   },
 
   // Text Colors
+
+
+  textWhite: {
+    color: "#ffffff",
+  },
+  textBlack: {
+    color: "#000000",
+  },
+
   // Slate
   textSlate50: {
     color: "#f8fafc",
@@ -1860,6 +1869,12 @@ export const s = StyleSheet.create({
 
   // Bg colors
 
+  bgWhite: {
+    backgroundColor: "#ffffff",
+  },
+  bgBlack: {
+    backgroundColor: "#000000",
+  },
   bgSlate50: {
     backgroundColor: "#f8fafc",
   },
@@ -2608,6 +2623,772 @@ export const s = StyleSheet.create({
     backgroundColor: "#4c0d24",
   },
 
+  borderSlate50: {
+    borderColor: "#f8fafc",
+  },
+  borderSlate100: {
+    borderColor: "#f1f5f9",
+  },
+  borderSlate200: {
+    borderColor: "#e2e8f0",
+  },
+  borderSlate300: {
+    borderColor: "#cbd5e1",
+  },
+  borderSlate400: {
+    borderColor: "#94a3b8",
+  },
+  borderSlate500: {
+    borderColor: "#64748b",
+  },
+  borderSlate600: {
+    borderColor: "#475569",
+  },
+  borderSlate700: {
+    borderColor: "#334155",
+  },
+  borderSlate800: {
+    borderColor: "#1e293b",
+  },
+  borderSlate900: {
+    borderColor: "#0f172a",
+  },
+  borderSlate950: {
+    borderColor: "#020617",
+  },
+  // Gray
+  borderGray50: {
+    borderColor: "#f9fafb",
+  },
+  borderGray100: {
+    borderColor: "#f3f4f6",
+  },
+  borderGray200: {
+    borderColor: "#e5e7eb",
+  },
+  borderGray300: {
+    borderColor: "#d1d5db",
+  },
+  borderGray400: {
+    borderColor: "#9ca3af",
+  },
+  borderGray500: {
+    borderColor: "#6b7280",
+  },
+  borderGray600: {
+    borderColor: "#4b5563",
+  },
+  borderGray700: {
+    borderColor: "#374151",
+  },
+  borderGray800: {
+    borderColor: "#1f2937",
+  },
+  borderGray900: {
+    borderColor: "#111827",
+  },
+  borderGray950: {
+    borderColor: "#030712",
+  },
+  // Zinc
+  borderZinc50: {
+    borderColor: "#fafafa",
+  },
+  borderZinc100: {
+    borderColor: "#f4f4f5",
+  },
+  borderZinc200: {
+    borderColor: "#e4e4e7",
+  },
+  borderZinc300: {
+    borderColor: "#d4d4d8",
+  },
+  borderZinc400: {
+    borderColor: "#a1a1aa",
+  },
+  borderZinc500: {
+    borderColor: "#71717a",
+  },
+  borderZinc600: {
+    borderColor: "#52525b",
+  },
+  borderZinc700: {
+    borderColor: "#3f3f46",
+  },
+  borderZinc800: {
+    borderColor: "#27272a",
+  },
+  borderZinc900: {
+    borderColor: "#18181b",
+  },
+  borderZinc950: {
+    borderColor: "#09090b",
+  },
+  // Neutral
+  borderNeutral50: {
+    borderColor: "#fafafa",
+  },
+  borderNeutral100: {
+    borderColor: "#f5f5f5",
+  },
+  borderNeutral200: {
+    borderColor: "#e5e5e5",
+  },
+  borderNeutral300: {
+    borderColor: "#d4d4d4",
+  },
+  borderNeutral400: {
+    borderColor: "#a3a3a3",
+  },
+  borderNeutral500: {
+    borderColor: "#737373",
+  },
+  borderNeutral600: {
+    borderColor: "#525252",
+  },
+  borderNeutral700: {
+    borderColor: "#404040",
+  },
+  borderNeutral800: {
+    borderColor: "#262626",
+  },
+  borderNeutral900: {
+    borderColor: "#171717",
+  },
+  borderNeutral950: {
+    borderColor: "#0a0a0a",
+  },
+  // Stone
+  borderStone50: {
+    borderColor: "#fafaf9",
+  },
+  borderStone100: {
+    borderColor: "#f5f5f4",
+  },
+  borderStone200: {
+    borderColor: "#e7e5e4",
+  },
+  borderStone300: {
+    borderColor: "#d6d3d1",
+  },
+  borderStone400: {
+    borderColor: "#a8a29e",
+  },
+  borderStone500: {
+    borderColor: "#78716c",
+  },
+  borderStone600: {
+    borderColor: "#57534e",
+  },
+  borderStone700: {
+    borderColor: "#44403c",
+  },
+  borderStone800: {
+    borderColor: "#292524",
+  },
+  borderStone900: {
+    borderColor: "#1c1917",
+  },
+  borderStone950: {
+    borderColor: "#0c0a09",
+  },
+  // Red
+  borderRed50: {
+    borderColor: "#fef2f2",
+  },
+  borderRed100: {
+    borderColor: "#fee2e2",
+  },
+  borderRed200: {
+    borderColor: "#fecaca",
+  },
+  borderRed300: {
+    borderColor: "#fca5a5",
+  },
+  borderRed400: {
+    borderColor: "#f87171",
+  },
+  borderRed500: {
+    borderColor: "#ef4444",
+  },
+  borderRed600: {
+    borderColor: "#dc2626",
+  },
+  borderRed700: {
+    borderColor: "#b91c1c",
+  },
+  borderRed800: {
+    borderColor: "#991b1b",
+  },
+  borderRed900: {
+    borderColor: "#7f1d1d",
+  },
+  borderRed950: {
+    borderColor: "#450a0a",
+  },
+  // Orange
+  borderOrange50: {
+    borderColor: "#fff7ed",
+  },
+  borderOrange100: {
+    borderColor: "#ffedd5",
+  },
+  borderOrange200: {
+    borderColor: "#fed7aa",
+  },
+  borderOrange300: {
+    borderColor: "#fdba74",
+  },
+  borderOrange400: {
+    borderColor: "#fb923c",
+  },
+  borderOrange500: {
+    borderColor: "#f97316",
+  },
+  borderOrange600: {
+    borderColor: "#ea580c",
+  },
+  borderOrange700: {
+    borderColor: "#c2410c",
+  },
+  borderOrange800: {
+    borderColor: "#9a3412",
+  },
+  borderOrange900: {
+    borderColor: "#7c2d12",
+  },
+  borderOrange950: {
+    borderColor: "#431407",
+  },
+  // Amber
+  borderAmber50: {
+    borderColor: "#fffbeb",
+  },
+  borderAmber100: {
+    borderColor: "#fef3c7",
+  },
+  borderAmber200: {
+    borderColor: "#fde68a",
+  },
+  borderAmber300: {
+    borderColor: "#fcd34d",
+  },
+  borderAmber400: {
+    borderColor: "#fbbf24",
+  },
+  borderAmber500: {
+    borderColor: "#f59e0b",
+  },
+  borderAmber600: {
+    borderColor: "#d97706",
+  },
+  borderAmber700: {
+    borderColor: "#b45309",
+  },
+  borderAmber800: {
+    borderColor: "#92400e",
+  },
+  borderAmber900: {
+    borderColor: "#78350f",
+  },
+  borderAmber950: {
+    borderColor: "#451a03",
+  },
+  // Yellow
+  borderYellow50: {
+    borderColor: "#fefce8",
+  },
+  borderYellow100: {
+    borderColor: "#fef9c3",
+  },
+  borderYellow200: {
+    borderColor: "#fef08a",
+  },
+  borderYellow300: {
+    borderColor: "#fde047",
+  },
+  borderYellow400: {
+    borderColor: "#facc15",
+  },
+  borderYellow500: {
+    borderColor: "#eab308",
+  },
+  borderYellow600: {
+    borderColor: "#ca8a04",
+  },
+  borderYellow700: {
+    borderColor: "#a16207",
+  },
+  borderYellow800: {
+    borderColor: "#854d0e",
+  },
+  borderYellow900: {
+    borderColor: "#713f12",
+  },
+  borderYellow950: {
+    borderColor: "#422006",
+  },
+  // Lime
+  borderLime50: {
+    borderColor: "#f7fee7",
+  },
+  borderLime100: {
+    borderColor: "#ecfccb",
+  },
+  borderLime200: {
+    borderColor: "#d9f99d",
+  },
+  borderLime300: {
+    borderColor: "#bef264",
+  },
+  borderLime400: {
+    borderColor: "#a3e635",
+  },
+  borderLime500: {
+    borderColor: "#84cc16",
+  },
+  borderLime600: {
+    borderColor: "#65a30d",
+  },
+  borderLime700: {
+    borderColor: "#4d7c0f",
+  },
+  borderLime800: {
+    borderColor: "#3f6212",
+  },
+  borderLime900: {
+    borderColor: "#365314",
+  },
+  borderLime950: {
+    borderColor: "#1a2e05",
+  },
+  // Green
+  borderGreen50: {
+    borderColor: "#f0fdf4",
+  },
+  borderGreen100: {
+    borderColor: "#dcfce7",
+  },
+  borderGreen200: {
+    borderColor: "#bbf7d0",
+  },
+  borderGreen300: {
+    borderColor: "#86efac",
+  },
+  borderGreen400: {
+    borderColor: "#4ade80",
+  },
+  borderGreen500: {
+    borderColor: "#22c55e",
+  },
+  borderGreen600: {
+    borderColor: "#16a34a",
+  },
+  borderGreen700: {
+    borderColor: "#15803d",
+  },
+  borderGreen800: {
+    borderColor: "#166534",
+  },
+  borderGreen900: {
+    borderColor: "#14532d",
+  },
+  borderGreen950: {
+    borderColor: "#052e16",
+  },
+  // Emerald
+  borderEmerald50: {
+    borderColor: "#ecfdf5",
+  },
+  borderEmerald100: {
+    borderColor: "#d1fae5",
+  },
+  borderEmerald200: {
+    borderColor: "#a7f3d0",
+  },
+  borderEmerald300: {
+    borderColor: "#6ee7b7",
+  },
+  borderEmerald400: {
+    borderColor: "#34d399",
+  },
+  borderEmerald500: {
+    borderColor: "#10b981",
+  },
+  borderEmerald600: {
+    borderColor: "#059669",
+  },
+  borderEmerald700: {
+    borderColor: "#047857",
+  },
+  borderEmerald800: {
+    borderColor: "#065f46",
+  },
+  borderEmerald900: {
+    borderColor: "#064e3b",
+  },
+  borderEmerald950: {
+    borderColor: "#022c22",
+  },
+  // Teal
+  borderTeal50: {
+    borderColor: "#f0fdfa",
+  },
+  borderTeal100: {
+    borderColor: "#ccfbf1",
+  },
+  borderTeal200: {
+    borderColor: "#99f6e4",
+  },
+  borderTeal300: {
+    borderColor: "#5eead4",
+  },
+  borderTeal400: {
+    borderColor: "#2dd4bf",
+  },
+  borderTeal500: {
+    borderColor: "#14b8a6",
+  },
+  borderTeal600: {
+    borderColor: "#0d9488",
+  },
+  borderTeal700: {
+    borderColor: "#0f766e",
+  },
+  borderTeal800: {
+    borderColor: "#115e59",
+  },
+  borderTeal900: {
+    borderColor: "#134e4a",
+  },
+  borderTeal950: {
+    borderColor: "#042f2e",
+  },
+  // Cyan
+  borderCyan50: {
+    borderColor: "#ecfeff",
+  },
+  borderCyan100: {
+    borderColor: "#cffafe",
+  },
+  borderCyan200: {
+    borderColor: "#a5f3fc",
+  },
+  borderCyan300: {
+    borderColor: "#67e8f9",
+  },
+  borderCyan400: {
+    borderColor: "#22d3ee",
+  },
+  borderCyan500: {
+    borderColor: "#06b6d4",
+  },
+  borderCyan600: {
+    borderColor: "#0891b2",
+  },
+  borderCyan700: {
+    borderColor: "#0e7490",
+  },
+  borderCyan800: {
+    borderColor: "#155e75",
+  },
+  borderCyan900: {
+    borderColor: "#164e63",
+  },
+  borderCyan950: {
+    borderColor: "#083344",
+  },
+  // Sky
+  borderSky50: {
+    borderColor: "#f0f9ff",
+  },
+  borderSky100: {
+    borderColor: "#e0f2fe",
+  },
+  borderSky200: {
+    borderColor: "#bae6fd",
+  },
+  borderSky300: {
+    borderColor: "#7dd3fc",
+  },
+  borderSky400: {
+    borderColor: "#38bdf8",
+  },
+  borderSky500: {
+    borderColor: "#0ea5e9",
+  },
+  borderSky600: {
+    borderColor: "#0284c7",
+  },
+  borderSky700: {
+    borderColor: "#0369a1",
+  },
+  borderSky800: {
+    borderColor: "#075985",
+  },
+  borderSky900: {
+    borderColor: "#0c4a6e",
+  },
+  borderSky950: {
+    borderColor: "#082f49",
+  },
+  // Blue
+  borderBlue50: {
+    borderColor: "#eff6ff",
+  },
+  borderBlue100: {
+    borderColor: "#dbeafe",
+  },
+  borderBlue200: {
+    borderColor: "#bfdbfe",
+  },
+  borderBlue300: {
+    borderColor: "#93c5fd",
+  },
+  borderBlue400: {
+    borderColor: "#60a5fa",
+  },
+  borderBlue500: {
+    borderColor: "#3b82f6",
+  },
+  borderBlue600: {
+    borderColor: "#2563eb",
+  },
+  borderBlue700: {
+    borderColor: "#1d4ed8",
+  },
+  borderBlue800: {
+    borderColor: "#1e40af",
+  },
+  borderBlue900: {
+    borderColor: "#1e3a8a",
+  },
+  borderBlue950: {
+    borderColor: "#172554",
+  },
+  // Indigo
+  borderIndigo50: {
+    borderColor: "#eef2ff",
+  },
+  borderIndigo100: {
+    borderColor: "#e0e7ff",
+  },
+  borderIndigo200: {
+    borderColor: "#c7d2fe",
+  },
+  borderIndigo300: {
+    borderColor: "#a5b4fc",
+  },
+  borderIndigo400: {
+    borderColor: "#818cf8",
+  },
+  borderIndigo500: {
+    borderColor: "#6366f1",
+  },
+  borderIndigo600: {
+    borderColor: "#4f46e5",
+  },
+  borderIndigo700: {
+    borderColor: "#4338ca",
+  },
+  borderIndigo800: {
+    borderColor: "#3730a3",
+  },
+  borderIndigo900: {
+    borderColor: "#312e81",
+  },
+  borderIndigo950: {
+    borderColor: "#1e1b4b",
+  },
+  // Violet
+  borderViolet50: {
+    borderColor: "#f5f3ff",
+  },
+  borderViolet100: {
+    borderColor: "#ede9fe",
+  },
+  borderViolet200: {
+    borderColor: "#ddd6fe",
+  },
+  borderViolet300: {
+    borderColor: "#c4b5fd",
+  },
+  borderViolet400: {
+    borderColor: "#a78bfa",
+  },
+  borderViolet500: {
+    borderColor: "#8b5cf6",
+  },
+  borderViolet600: {
+    borderColor: "#7c3aed",
+  },
+  borderViolet700: {
+    borderColor: "#6d28d9",
+  },
+  borderViolet800: {
+    borderColor: "#5b21b6",
+  },
+  borderViolet900: {
+    borderColor: "#4c1d95",
+  },
+  borderViolet950: {
+    borderColor: "#2e1065",
+  },
+  // Purple
+  borderPurple50: {
+    borderColor: "#faf5ff",
+  },
+  borderPurple100: {
+    borderColor: "#f3e8ff",
+  },
+  borderPurple200: {
+    borderColor: "#e9d5ff",
+  },
+  borderPurple300: {
+    borderColor: "#d8b4fe",
+  },
+  borderPurple400: {
+    borderColor: "#c084fc",
+  },
+  borderPurple500: {
+    borderColor: "#a855f7",
+  },
+  borderPurple600: {
+    borderColor: "#9333ea",
+  },
+  borderPurple700: {
+    borderColor: "#7e22ce",
+  },
+  borderPurple800: {
+    borderColor: "#6b21a8",
+  },
+  borderPurple900: {
+    borderColor: "#581c87",
+  },
+  borderPurple950: {
+    borderColor: "#3b0764",
+  },
+  // Fuchsia
+  borderFuchsia50: {
+    borderColor: "#fdf4ff",
+  },
+  borderFuchsia100: {
+    borderColor: "#fae8ff",
+  },
+  borderFuchsia200: {
+    borderColor: "#f5d0fe",
+  },
+  borderFuchsia300: {
+    borderColor: "#f0abfc",
+  },
+  borderFuchsia400: {
+    borderColor: "#e879f9",
+  },
+  borderFuchsia500: {
+    borderColor: "#d946ef",
+  },
+  borderFuchsia600: {
+    borderColor: "#c026d3",
+  },
+  borderFuchsia700: {
+    borderColor: "#a21caf",
+  },
+  borderFuchsia800: {
+    borderColor: "#86198f",
+  },
+  borderFuchsia900: {
+    borderColor: "#701a75",
+  },
+  borderFuchsia950: {
+    borderColor: "#4a044e",
+  },
+  // Pink
+  borderPink50: {
+    borderColor: "#fdf2f8",
+  },
+  borderPink100: {
+    borderColor: "#fce7f3",
+  },
+  borderPink200: {
+    borderColor: "#fbcfe8",
+  },
+  borderPink300: {
+    borderColor: "#f9a8d4",
+  },
+  borderPink400: {
+    borderColor: "#f472b6",
+  },
+  borderPink500: {
+    borderColor: "#ec4899",
+  },
+  borderPink600: {
+    borderColor: "#db2777",
+  },
+  borderPink700: {
+    borderColor: "#be185d",
+  },
+  borderPink800: {
+    borderColor: "#9d174d",
+  },
+  borderPink900: {
+    borderColor: "#831843",
+  },
+  borderPink950: {
+    borderColor: "#500724",
+  },
+  // Rose
+  borderRose50: {
+    borderColor: "#fff1f2",
+  },
+  borderRose100: {
+    borderColor: "#ffe4e6",
+  },
+  borderRose200: {
+    borderColor: "#fecdd3",
+  },
+  borderRose300: {
+    borderColor: "#fda4af",
+  },
+  borderRose400: {
+    borderColor: "#fb7185",
+  },
+  borderRose500: {
+    borderColor: "#f43f5e",
+  },
+  borderRose600: {
+    borderColor: "#e11d48",
+  },
+  borderRose700: {
+    borderColor: "#be123c",
+  },
+  borderRose800: {
+    borderColor: "#9f1239",
+  },
+  borderRose900: {
+    borderColor: "#881337",
+  },
+  borderRose950: {
+    borderColor: "#510a1a",
+  },
+
+
+  border0: {
+    borderWidth: 0
+  },
+  border1: {
+    borderWidth: 1
+  },
+  border2: {
+    borderWidth: 2
+  },
+  border3: {
+    borderWidth: 3
+  },
+  border4: {
+    borderWidth: 4
+  },
+  
+
   // font sizes
   textXS: {
     fontSize: 12,
@@ -2685,4 +3466,11 @@ export const s = StyleSheet.create({
   black: {
     fontFamily: "Inter_900Black",
   },
+
+
+  container: {
+    flex: 1,
+    paddingHorizontal: 14,
+    backgroundColor: '#ffffff'
+  }
 });

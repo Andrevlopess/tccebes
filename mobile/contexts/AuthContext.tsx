@@ -37,8 +37,8 @@ export default function AuthProvider({
 
   useEffect(() => {
     session && session.user
-      ? router.replace("/(app)/(tabs)")
-      : router.replace("/(auth)/login");
+      ? router.replace("/(app)/(tabs)/home")
+      : router.replace("/(auth)/main");
 
     console.log("signed in", session);
   }, [session]);
