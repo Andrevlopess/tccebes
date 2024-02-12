@@ -4,7 +4,6 @@ import { useLocalSearchParams } from "expo-router";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function SettingsPage() {
-  const { user } = useAuth();
 
   return (
     <View
@@ -15,7 +14,7 @@ export default function SettingsPage() {
         gap: 12,
       }}
     >
-      <Text>settings for user - {user?.id} </Text>
+      <Text>settings for user </Text>
     </View>
   );
 }

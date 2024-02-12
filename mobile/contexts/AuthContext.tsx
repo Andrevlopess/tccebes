@@ -1,11 +1,18 @@
 import { IUser } from "@/types/User";
 import { createContext, useState, useEffect } from "react";
 import { useSegments, useRouter } from "expo-router";
+import { supabase } from "@/lib/supabase";
+import { AuthError, Session } from "@supabase/supabase-js";
 
 interface IAuthContext {
-  user: IUser | null;
-  signIn: (user: IUser) => void;
-  signOut: () => void;
+  session: Session | null;
+  signInWithEmail: (data: signInWithEmailType) => Promise<void | AuthError>;
+  signUpWithEmail: (data: signInWithEmailType) => Promise<void | AuthError>;
+  signOut: () => Promise<void>;
+}
+interface signInWithEmailType {
+  email: string;
+  password: string;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -15,39 +22,57 @@ export default function AuthProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const rootSegment = useSegments()[0];
   const router = useRouter();
-  const [user, setUser] = useState<IUser | null>({
-    token: "asdasfsadfsdfegybwertutywey",
-    id: "1",
-    name: "andrevlopes",
-    email: "andrevlopes@gmail.com",
-  });
-
-  console.log("amem");
+  const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    // if (!user) return;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-    if (!user && rootSegment !== "(auth)") {
-      console.log("should be auth");
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
-      router.replace("/(auth)/login");
-    } else if (user && rootSegment !== "(app)") {
-      router.replace("/(app)/(tabs)");
-    }
-  }, [user, rootSegment]);
+  useEffect(() => {
+    session && session.user
+      ? router.replace("/(app)/(tabs)")
+      : router.replace("/(auth)/login");
 
-  function signIn(user: IUser) {
-    setUser(user);
+    console.log("signed in", session);
+  }, [session]);
+
+  async function signInWithEmail({ email, password }: signInWithEmailType) {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) return error;
   }
 
-  function signOut() {
-    setUser(null);
+  async function signUpWithEmail({ email, password }: signInWithEmailType) {
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) return error;
+    if (!session) alert("Please check your inbox for email verification!");
+  }
+
+  async function signOut() {
+    supabase.auth.signOut();
   }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ session, signInWithEmail, signUpWithEmail, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

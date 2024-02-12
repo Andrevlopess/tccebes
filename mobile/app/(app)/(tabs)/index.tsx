@@ -1,37 +1,81 @@
 import { useAuth } from "@/hooks/useAuth";
-import { Link, router } from "expo-router";
-import { useState } from "react";
-import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import { supabase } from "@/lib/supabase";
+import { s } from "@/styles/globals";
+import { useEffect, useState } from "react";
+import { View, Text, Pressable, Alert } from "react-native";
 
 const HomePage = () => {
-  const [user, setUser] = useState<string>("default");
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState("");
+  const [website, setWebsite] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-  const { signOut } = useAuth();
+  const { signOut, session } = useAuth();
+
+  // async function getProfile() {
+  //   try {
+  //     setLoading(true);
+  //     if (!session?.user) throw new Error("No user on the session!");
+
+  //     const { data, error, status } = await supabase
+  //       .from("profiles")
+  //       .select(`username, website, avatar_url`)
+  //       .eq("id", session?.user.id)
+  //       .single();
+
+  //     if (error && status !== 406) {
+  //       console.log('deu ruim');
+
+  //       throw error;
+  //     }
+
+  //     console.log("data=>", data);
+
+  //     if (data) {
+  //       setUsername(data.username);
+  //       setWebsite(data.website);
+  //       setAvatarUrl(data.avatar_url);
+  //     }
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       Alert.alert(error.message);
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getProfile();
+
+  //   console.log(username);
+
+  //   console.log(website);
+  //   console.log(avatarUrl);
+  // }, []);
 
   return (
-    <View style={{padding: 8}}>
+    <View style={{ padding: 8 }}>
       <Text>HomePage</Text>
-      <TextInput
-        onChangeText={setUser}
-        value={user}
-        style={{
-          height: 40,
-          margin: 12,
-          borderWidth: 1,
-          padding: 10,
-        }}
-      />
+      <Text>
+        {session?.user.email}
+        <br/>
+        {session?.user.id}
+      </Text>
 
       <Pressable
-        onPress={signOut}
-        style={{
-          paddingHorizontal: 16,
-          paddingVertical: 10,
-          borderRadius: 8,
-          backgroundColor: "#3b82f6",
-        }}
+        style={[
+          s.mt18,
+          s.bgViolet800,
+          s.radius12,
+          s.itemsCenter,
+          s.justifyCenter,
+          s.p14,
+        ]}
+        disabled={loading}
+        onPress={() => signOut()}
       >
-        <Text style={{ color: "#fff", textAlign: 'center'}}>Sign OUT</Text>
+        <Text style={[s.regular, s.textNeutral50, s.semibold]}>Sair</Text>
       </Pressable>
     </View>
   );

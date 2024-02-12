@@ -14,7 +14,6 @@ import PasswordInput from "@/components/ui/PasswordInput";
 import LabelInput from "@/components/ui/LabelInput";
 import { s } from "@/styles/globals";
 import { Link } from "expo-router";
-import { Loader2 } from "lucide-react-native";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -29,28 +28,13 @@ AppState.addEventListener("change", (state) => {
 });
 
 export default function Auth() {
+  const [name, setName] = useState("andrevlopes");
   const [email, setEmail] = useState("andre.vitor@anchieta.br");
   const [password, setPassword] = useState("andrevlopes__");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<AuthError | null>(null);
 
-  const { signInWithEmail, signUpWithEmail } = useAuth();
-
-  async function handleSignIn() {
-    try {
-      setLoading(true);
-      const res = await signInWithEmail({ email, password });
-
-      if (res) {
-        alert(res);
-        setError(res);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { signUpWithEmail } = useAuth();
 
   async function handleSignUp() {
     try {
@@ -84,10 +68,20 @@ export default function Auth() {
       )}
 
       <Text style={[s.text2XL, s.bold, s.px4]}>
-        Faça seu login e acesse seus treinos
+        Crie sua conta e melhore seus treinos
       </Text>
 
       <View style={[s.p18, s.radius6, s.bgGray100, s.mt24]}>
+        <LabelInput
+          label="Nome"
+          onChangeText={(text) => setName(text)}
+          value={name}
+          placeholder="name"
+          autoCapitalize={"none"}
+        />
+      </View>
+
+      <View style={[s.p18, s.radius6, s.bgGray100, s.mt12]}>
         <LabelInput
           label="Email"
           onChangeText={(text) => setEmail(text)}
@@ -109,7 +103,7 @@ export default function Auth() {
 
       <Pressable
         style={[
-          s.mt12,
+          s.mt18,
           s.bgViolet800,
           s.radius12,
           s.itemsCenter,
@@ -117,35 +111,21 @@ export default function Auth() {
           s.p14,
         ]}
         disabled={loading}
-        onPress={() => handleSignIn()}
+        onPress={() => handleSignUp()}
       >
         {loading ? (
           <ActivityIndicator color={"#fff"} />
         ) : (
-          <Text style={[s.regular, s.textNeutral50]}>Entrar</Text>
+          <Text style={[s.regular, s.textNeutral50, s.semibold]}>
+            Cadastrar
+          </Text>
         )}
       </Pressable>
 
-      {/* <Pressable
-        style={[
-          s.mt12,
-          s.bgViolet800,
-          s.radius12,
-          s.itemsCenter,
-          s.justifyCenter,
-          s.p14,
-        ]}
-
-        disabled={loading}
-        onPress={() => handleSignIn()}
-      >
-        <Text style={[s.regular, s.textNeutral50]}>Sign in</Text>
-      </Pressable> */}
-
-      <Text style={[s.textCenter, s.textGray500, s.semibold, s.mt24]}>
-        Ainda não tem uma conta?
+      <Text style={[s.textCenter, s.textGray500, s.bold, s.mt24]}>
+        Já tem uma conta?
         <Link
-          href="/(auth)/signin"
+          href="/(auth)/login"
           style={[
             s.textCenter,
             s.textViolet700,
@@ -154,7 +134,7 @@ export default function Auth() {
             s.px4,
           ]}
         >
-          Criar
+          Entrar
         </Link>
       </Text>
     </View>
