@@ -19,19 +19,21 @@ const HomePage = () => {
   const scroll = useRef(new Animated.Value(0)).current
 
   return (
-    <View style={{ padding: 8, gap:24 }}>
+    <View style={[s.bgWhite, s.flex1]}>
       <Text>HomePage</Text>
       <Text>
         {session?.user.email}
-        <br />
         {session?.user.id}
       </Text>
 
       <FlatList
         data={workouts}
         keyExtractor={(item) => item.id}
+        snapToInterval={100}
         horizontal
         showsHorizontalScrollIndicator={false}
+        
+        style={{flexGrow: 0 }}
         contentContainerStyle={{
           gap: 8
         }}

@@ -1,14 +1,16 @@
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { s } from "@/styles/globals";
 import Logo from "@/assets/icons/Logo";
-import { Link } from "expo-router";
-import LabelInput from "@/components/ui/LabelInput";
+import { Link, Stack } from "expo-router";
 
 export default function MainAuthPage() {
+
+  const [text, onChangeText] = useState('')
+
   return (
-    <View style={[ s.justifyBetween, s.container,  s.py24]}>
-      {/* <View
+    <View style={[s.justifyBetween, s.container, s.py24]}>
+      <View
         style={[s.flexColumn, s.gap16, s.itemsCenter, s.flex1, s.justifyCenter]}
       >
         <Logo />
@@ -39,9 +41,8 @@ export default function MainAuthPage() {
             </Text>
           </TouchableOpacity>
         </Link>
-      </View> */}
-
-      <LabelInput label="Email" containerStyles={[s.bgNeutral500, s.p14]} style={[s.border1]}/>
+      </View>
+      {/* <LabelInput label="Email" containerStyles={[s.bgNeutral500, s.p14]} style={[s.border1]} /> */}
     </View>
   );
 }

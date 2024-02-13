@@ -6,14 +6,17 @@ import TabLibrary from "@/assets/icons/TabLibrary";
 
 export default function TabLayout() {
   return (
-    <Tabs  initialRouteName="home" sceneContainerStyle={{}}>
+    <Tabs
+      initialRouteName="home"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#7c3aed",
+      }}>
       <Tabs.Screen
         name="home"
         options={{
-          headerShown: false,
           title: "Home",
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "#7c3aed",
           tabBarIcon: ({ color, focused }) => (
             <TabHome
               color={color}
@@ -26,10 +29,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="library"
         options={{
-          headerShown: false,
           title: "Library",
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "#7c3aed",
           tabBarIcon: ({ color, focused }) => (
             <TabLibrary
               color={color}
@@ -42,10 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="account"
         options={{
-          tabBarActiveTintColor: "#7c3aed",
-          headerShown: false,
           title: "Account",
-          tabBarShowLabel: false,
           tabBarIcon: ({ color, focused }) => (
             <TabAccount
               color={color}

@@ -3,19 +3,18 @@ import {
   View,
   AppState,
   Text,
-  Button,
   Pressable,
   ActivityIndicator,
 } from "react-native";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/hooks/useAuth";
 import { AuthError } from "@supabase/supabase-js";
-import PasswordInput from "@/components/ui/PasswordInput";
-import LabelInput from "@/components/ui/LabelInput";
 import { s } from "@/styles/globals";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import Logo from "@/assets/icons/Logo";
+import FloatingLabelInput from "@/components/ui/FloatingLabelInput";
+import SignUpForm from "@/components/SignUpForm";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -58,8 +57,9 @@ export default function Auth() {
 
   return (
     <View style={[s.container, s.py36, s.gap60]}>
+
       <Pressable onPress={router.back}>
-        <ArrowLeft />
+        <ArrowLeft color={"#444333"} />
       </Pressable>
 
       <View style={[s.flex1, s.gap46]}>
@@ -70,57 +70,7 @@ export default function Auth() {
           </Text>
         </View>
 
-        <View style={[s.gap16, s.mt24]}>
-
-          <View style={[s.p18, s.radius6, s.bgGray100]}>
-            <LabelInput
-              label="Nome"
-              onChangeText={(text) => setName(text)}
-              value={name}
-              placeholder="name"
-              autoCapitalize={"none"}
-            />
-          </View>
-
-          <View style={[s.p18, s.radius6, s.bgGray100]}>
-            <LabelInput
-              label="Email"
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-              placeholder="email"
-              autoCapitalize={"none"}
-            />
-          </View>
-
-          <View style={[s.p18, s.radius6, s.bgGray100]}>
-            <PasswordInput
-              label="Senha"
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              placeholder="Insira sua senha"
-              autoCapitalize={"none"}
-            />
-          </View>
-
-          <Pressable
-            style={[
-              s.mt12,
-              s.bgViolet700,
-              s.radius12,
-              s.itemsCenter,
-              s.justifyCenter,
-              s.p14,
-            ]}
-            disabled={loading}
-            onPress={() => handleSignUp()}
-          >
-            {loading ? (
-              <ActivityIndicator color={"#fff"} />
-            ) : (
-              <Text style={[s.regular, s.textNeutral50]}>Entrar</Text>
-            )}
-          </Pressable>
-        </View>
+        <SignUpForm />
       </View>
     </View>
   );

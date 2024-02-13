@@ -14,7 +14,8 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 import { useCallback } from "react";
-import { SafeAreaView } from "react-native";
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { s } from "@/styles/globals";
 
 export default function RootLayout() {
   let [fontsLoaded, fontError] = useFonts({
@@ -41,9 +42,17 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-     
-        <Slot />
-
+      <SafeAreaView style={styles.AndroidSafeArea}>
+        <Slot initialRouteName="(auth)"/>
+      </SafeAreaView>
     </AuthProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  AndroidSafeArea: {
+    flex: 1,
+    backgroundColor: "white",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  }
+});
