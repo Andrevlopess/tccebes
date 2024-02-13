@@ -6,8 +6,6 @@ import { Link, Stack } from "expo-router";
 
 export default function MainAuthPage() {
 
-  const [text, onChangeText] = useState('')
-
   return (
     <View style={[s.justifyBetween, s.container, s.py24]}>
       <View

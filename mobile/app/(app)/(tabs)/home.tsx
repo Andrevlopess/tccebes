@@ -1,7 +1,10 @@
 import WorkoutCard from "@/components/WorkoutCard";
+import WorkoutsList from "@/components/WorkoutsList";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/lib/supabase";
 import { s } from "@/styles/globals";
-import { useRef } from "react";
+import { router } from "expo-router";
+import { useEffect, useRef } from "react";
 import { View, Text, Pressable, FlatList, Animated } from "react-native";
 
 const workouts = [
@@ -13,37 +16,30 @@ const workouts = [
 ];
 
 const HomePage = () => {
-  const { signOut, session } = useAuth();
+  const { session } = useAuth();
 
+  const getfiles = async () => {
+    const { data, error } = await supabase.storage
+      .from("exercises-demos")
+      .list("", { limit: 1500 });
 
-  const scroll = useRef(new Animated.Value(0)).current
+    console.log(data);
+  };
+
+  // useEffect(() => {
+  //   getfiles();
+  // }, []);
 
   return (
-    <View style={[s.bgWhite, s.flex1]}>
-      <Text>HomePage</Text>
-      <Text>
-        {session?.user.email}
-        {session?.user.id}
+    <View style={[s.container, s.bgSnowWhite, s.gap24]}>
+      <Text style={[s.bold, s.textXL]}>
+        Olá, {session?.user.user_metadata.username}
       </Text>
 
-      <FlatList
-        data={workouts}
-        keyExtractor={(item) => item.id}
-        snapToInterval={100}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        
-        style={{flexGrow: 0 }}
-        contentContainerStyle={{
-          gap: 8
-        }}
-        renderItem={({ item }) => (
-          <WorkoutCard
-            id={item.id}
-            title={item.title}
-          />
-        )}
-      />
+      <View style={[s.gap16]}>
+        <Text style={[s.semibold, s.textBase]}>Meus treinos</Text>
+        <WorkoutsList />
+      </View>
     </View>
   );
 };

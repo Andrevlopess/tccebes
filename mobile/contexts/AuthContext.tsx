@@ -1,6 +1,5 @@
-import { IUser } from "@/types/User";
 import { createContext, useState, useEffect } from "react";
-import { useSegments, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { supabase } from "@/lib/supabase";
 import { AuthError, Session } from "@supabase/supabase-js";
 
@@ -44,7 +43,7 @@ export default function AuthProvider({
   useEffect(() => {
     session && session.user
       ? router.replace("/(app)/(tabs)/home")
-      : router.replace("/(auth)/main");
+      : router.replace("/(auth)/");
 
     console.log("signed in", session);
   }, [session]);
@@ -60,6 +59,9 @@ export default function AuthProvider({
   }
 
   async function signUpWithEmail({ username, email, password }: signUpWithEmailType) {
+
+    console.log(username);
+    
     const {
       data: { session },
       error,

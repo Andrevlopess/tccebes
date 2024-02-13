@@ -7,11 +7,11 @@ import { s } from '@/styles/globals';
 import { AuthError } from '@supabase/supabase-js';
 import { useAuth } from '@/hooks/useAuth';
 
-const SignInSchema = Yup.object().shape({
-    name: Yup.string()
+const SignUpSchema = Yup.object().shape({
+    username: Yup.string()
         .min(2, 'Insira um nome com mais caracteres')
         .max(70, 'Insira um nome com menos caracteres')
-        .required('Insira sua nome'),
+        .required('Insira seu nome'),
     email: Yup.string()
         .email('Email inválido')
         .required('Insira seu email'),
@@ -29,12 +29,16 @@ export default function SignUpForm() {
 
     const { signUpWithEmail } = useAuth();
 
-    async function handleSignUp({ username, email, password }: {
+    async function handleSignUp({ username, email, password } : {
         username: string,
         email: string,
         password: string
     }) {
+        console.log('andre');
+        
         try {
+            console.log(username, email, password);
+            
             setLoading(true);
 
             const res = await signUpWithEmail({ username, email, password });
@@ -55,10 +59,9 @@ export default function SignUpForm() {
 
         <Formik
             initialValues={{ username: '', email: '', password: '' }}
-            onSubmit={handleSignUp}
-            validationSchema={SignInSchema}
+            onSubmit={({email, password, username}) => handleSignUp({email, password, username})}
+            validationSchema={SignUpSchema}
         >
-
             {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                 <View style={[s.gap16, s.mt24]}>
 
@@ -69,6 +72,7 @@ export default function SignUpForm() {
                         onBlur={handleBlur('username')}
                         value={values.username}
                         autoCapitalize={"none"}
+                        error={errors.username}
                     />
 
                     <FloatingLabelInput

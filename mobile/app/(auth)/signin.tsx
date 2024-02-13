@@ -20,27 +20,8 @@ import Logo from "@/assets/icons/Logo";
 import FloatingLabelInput from "@/components/ui/FloatingLabelInput";
 import SignUpForm from "@/components/SignUpForm";
 
-// Tells Supabase Auth to continuously refresh the session automatically if
-// the app is in the foreground. When this is added, you will continue to receive
-// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
-// if the user's session is terminated. This should only be registered once.
-AppState.addEventListener("change", (state) => {
-  if (state === "active") {
-    supabase.auth.startAutoRefresh();
-  } else {
-    supabase.auth.stopAutoRefresh();
-  }
-});
 
 export default function Auth() {
-  const [name, setName] = useState("andrevlopes");
-  const [email, setEmail] = useState("andre.vitor@anchieta.br");
-  const [password, setPassword] = useState("andrevlopes__");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<AuthError | null>(null);
-
-  const { signUpWithEmail } = useAuth();
-
   const router = useRouter();
 
   return (

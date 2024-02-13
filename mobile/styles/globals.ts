@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
   // Flexbox
@@ -3467,10 +3467,19 @@ export const s = StyleSheet.create({
     fontFamily: "Inter_900Black",
   },
 
+  bgSnowWhite: {
+    backgroundColor: "#F5F6FA",
+  },
+
+
+  screenWidth: {
+    width: Dimensions.get("screen").width,
+  },
 
   container: {
     flex: 1,
+    paddingTop: 24,
     paddingHorizontal: 14,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   }
 });

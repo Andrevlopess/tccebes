@@ -12,8 +12,6 @@ import {
     View,
     Text
 } from 'react-native';
-
-
 interface IFloatingLabelInput extends TextInputProps {
     label: string
     titleActiveScale?: number
@@ -44,7 +42,7 @@ const FloatingLabelInput = ({
             {
                 translateY: animatedValue?.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [16, 0],
+                    outputRange: [12, 0],
                     extrapolate: 'clamp',
                 }),
             },
@@ -98,7 +96,6 @@ const FloatingLabelInput = ({
                         s.bgGray50,
                         s.radius12,
                         s.p12,
-                        
                         !!error ? s.borderRed400 : s.borderGray300
                     ]}>
 
@@ -112,8 +109,8 @@ const FloatingLabelInput = ({
 
                     <View style={[s.flexRow, s.itemsCenter, { paddingRight: 12 }]}>
                         <TextInput
-                            ref={inputRef}
                             {...props}
+                            ref={inputRef}
                             cursorColor={'#6d28d9'}
                             onChangeText={onChangeText}
                             value={value}
@@ -130,20 +127,19 @@ const FloatingLabelInput = ({
                                     ? <Eye size={20} color="#333" />
                                     : <EyeOff size={20} color="#333" />}
                             </Pressable>
-                        }
+                          }
                     </View>
 
                 </Animated.View>
+
                 {error &&
                     <View style={[s.flexRow, s.gap6, s.itemsCenter, s.px12, s.py6]}>
                         <AlertCircle color={'#ef4444'} size={20}/>
                         <Text style={[s.textSM, s.medium, s.textRed500]}>{error}</Text>
                     </View>
-
                 }
 
             </View>
-
         </TouchableWithoutFeedback>
 
     );

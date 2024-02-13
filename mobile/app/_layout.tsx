@@ -15,7 +15,6 @@ import {
 } from "@expo-google-fonts/inter";
 import { useCallback } from "react";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
-import { s } from "@/styles/globals";
 import { AppState } from "react-native";
 import { supabase } from "@/lib/supabase";
 
@@ -58,8 +57,8 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-      <SafeAreaView style={styles.AndroidSafeArea}>
-        <Slot initialRouteName="(auth)" />
+      <SafeAreaView onLayout={onLayoutRootView} style={styles.AndroidSafeArea}>
+        <Slot />
       </SafeAreaView>
     </AuthProvider>
   );
