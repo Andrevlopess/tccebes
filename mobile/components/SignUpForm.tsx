@@ -1,4 +1,4 @@
-import { View, Text, Pressable, ActivityIndicator } from 'react-native'
+import { View, Text, Pressable, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from "yup";
@@ -29,15 +29,15 @@ export default function SignUpForm() {
 
     const { signUpWithEmail } = useAuth();
 
-    async function handleSignUp({ name, email, password }: {
-        name: string,
+    async function handleSignUp({ username, email, password }: {
+        username: string,
         email: string,
         password: string
     }) {
         try {
             setLoading(true);
 
-            const res = await signUpWithEmail({ email, password });
+            const res = await signUpWithEmail({ username, email, password });
 
             if (res) {
                 alert(res);
@@ -52,12 +52,12 @@ export default function SignUpForm() {
 
 
     return (
+
         <Formik
-            initialValues={{ name: '', email: '', password: '' }}
-            onSubmit={values => console.log(values)}
+            initialValues={{ username: '', email: '', password: '' }}
+            onSubmit={handleSignUp}
             validationSchema={SignInSchema}
         >
-
 
             {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                 <View style={[s.gap16, s.mt24]}>
@@ -65,10 +65,9 @@ export default function SignUpForm() {
 
                     <FloatingLabelInput
                         label="Nome"
-                        onChangeText={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        value={values.name}
-                        placeholder="name"
+                        onChangeText={handleChange('username')}
+                        onBlur={handleBlur('username')}
+                        value={values.username}
                         autoCapitalize={"none"}
                     />
 
@@ -113,5 +112,6 @@ export default function SignUpForm() {
                 </View>
             )}
         </Formik>
+
     )
 }

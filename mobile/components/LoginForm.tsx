@@ -9,6 +9,7 @@ import {
     Text,
     ActivityIndicator,
     TouchableOpacity,
+    Alert,
 } from "react-native";
 import { AuthError } from '@supabase/supabase-js';
 import * as Yup from "yup";
@@ -27,6 +28,7 @@ const SignInSchema = Yup.object().shape({
 
 export default function LoginForm() {
     const [loading, setLoading] = useState(false);
+
     const [error, setError] = useState<AuthError | null>(null);
 
     const { signInWithEmail } = useAuth();
@@ -40,8 +42,10 @@ export default function LoginForm() {
 
             const res = await signInWithEmail({ email, password });
 
-            if (res) {
-                alert(res);
+            console.log(res);
+            
+            if (res?.message === 'Invalid login credentials') {
+                Alert.alert("Credenciais incorretas", 'Verifique se o email ou senha estão corretos e tente novamente!')
             }
         } catch (error) {
             console.error(error);
@@ -85,12 +89,12 @@ export default function LoginForm() {
                     <TouchableOpacity
                         activeOpacity={0.7}
                         style={[
-                            s.mt12,
+                            s.mt8,
                             s.bgViolet700,
                             s.radius12,
                             s.itemsCenter,
                             s.justifyCenter,
-                            s.p14,
+                            s.py24,
                         ]}
                         disabled={loading}
                         onPress={() => handleSubmit()}

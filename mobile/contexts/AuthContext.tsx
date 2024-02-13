@@ -7,10 +7,16 @@ import { AuthError, Session } from "@supabase/supabase-js";
 interface IAuthContext {
   session: Session | null;
   signInWithEmail: (data: signInWithEmailType) => Promise<void | AuthError>;
-  signUpWithEmail: (data: signInWithEmailType) => Promise<void | AuthError>;
+  signUpWithEmail: (data: signUpWithEmailType) => Promise<void | AuthError>;
   signOut: () => Promise<void>;
 }
 interface signInWithEmailType {
+  email: string;
+  password: string;
+}
+
+interface signUpWithEmailType {
+  username: string;
   email: string;
   password: string;
 }
@@ -47,18 +53,24 @@ export default function AuthProvider({
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
+      
     });
 
     if (error) return error;
   }
 
-  async function signUpWithEmail({ email, password }: signInWithEmailType) {
+  async function signUpWithEmail({ username, email, password }: signUpWithEmailType) {
     const {
       data: { session },
       error,
     } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: username,
+        }
+      }
     });
 
     if (error) return error;

@@ -5,6 +5,10 @@ import {
   Text,
   Pressable,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/hooks/useAuth";
@@ -39,22 +43,6 @@ export default function Auth() {
 
   const router = useRouter();
 
-  async function handleSignUp() {
-    try {
-      setLoading(true);
-      const res = await signUpWithEmail({ email, password });
-
-      if (res) {
-        alert(res);
-        setError(res);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <View style={[s.container, s.py36, s.gap60]}>
 
@@ -62,16 +50,24 @@ export default function Auth() {
         <ArrowLeft color={"#444333"} />
       </Pressable>
 
-      <View style={[s.flex1, s.gap46]}>
-        <View style={[s.flexColumn, s.gap16, s.itemsCenter, s.justifyCenter]}>
-          <Logo />
-          <Text style={[s.semibold]}>
-            Entre na sua conta e acesse seus treinos
-          </Text>
-        </View>
+      <KeyboardAvoidingView
+       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+       style={[s.flex1]}
+      >
+        <View style={[s.flex1, s.gap46]}>
+          <View style={[s.flexColumn, s.gap16, s.itemsCenter, s.justifyCenter]}>
+            <Logo />
+            <Text style={[s.semibold]}>
+              Entre na sua conta e acesse seus treinos
+            </Text>
+          </View>
 
-        <SignUpForm />
-      </View>
+
+          <SignUpForm />
+
+        </View>
+      </KeyboardAvoidingView>
+
     </View>
   );
 }
