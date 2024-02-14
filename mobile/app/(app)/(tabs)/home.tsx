@@ -1,11 +1,8 @@
-import WorkoutCard from "@/components/WorkoutCard";
 import WorkoutsList from "@/components/WorkoutsList";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase";
 import { s } from "@/styles/globals";
-import { router } from "expo-router";
-import { useEffect, useRef } from "react";
-import { View, Text, Pressable, FlatList, Animated } from "react-native";
+import { View, Text } from "react-native";
 
 const workouts = [
   { id: "1", title: "Treino A" },
@@ -37,7 +34,7 @@ const HomePage = () => {
       </Text>
 
       <View style={[s.gap16]}>
-        <Text style={[s.semibold, s.textBase]}>Meus treinos</Text>
+        <Text style={[s.semibold, s.textBase, s.px4]}>Meus treinos</Text>
         <WorkoutsList />
       </View>
     </View>

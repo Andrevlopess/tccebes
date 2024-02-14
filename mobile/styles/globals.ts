@@ -936,6 +936,9 @@ export const s = StyleSheet.create({
     paddingHorizontal: 96,
   },
 
+  radiusFull: {
+    borderRadius: 999,
+  },
   radius0: {
     borderRadius: 0,
   },

@@ -1,13 +1,6 @@
-interface IExercises {
-  id: string;
-  bodyPart: string;
-  equipment: string;
-  gifUrl: string;
-  name: string;
-  target: string;
-}
+import { IExercise } from "./types/exercise";
 
-const exercises: IExercises[] = [
+export const exercises: IExercise[] = [
     {
         "id": "0001",
         "bodyPart": "core",
@@ -10203,7 +10196,7 @@ const exercises: IExercises[] = [
     {
         "id": "2141",
         "bodyPart": "cardio",
-        "equipment": "",
+        "equipment": "elíptico",
         "gifUrl": "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_2141.gif",
         "name": "caminhada no elíptico",
         "target": "cardio"

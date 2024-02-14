@@ -7,11 +7,11 @@ import TabLibrary from "@/assets/icons/TabLibrary";
 export default function TabLayout() {
   return (
     <Tabs
-      initialRouteName="home"
+      initialRouteName="library"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#7c3aed",
+        tabBarActiveTintColor: "#7c3aed"
       }}>
       <Tabs.Screen
         name="home"
