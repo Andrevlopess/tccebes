@@ -12,24 +12,29 @@ const WIDTH = Dimensions.get("screen").width / 1.5;
 
 const ExercisePreview = ({ url, index }: { url: string; index: number }) => {
   return (
-    <Image
+    <View
       style={[
-        {
-          height: 50 - index,
-          width: 50 - index * 2,
-          marginRight: -16,
-          zIndex: 10 - index,
-          opacity: 1 - index / 10,
-        },
-        s.border1,
-        s.borderGray200,
         s.radius6,
-      ]}
-      source={{
-        uri: url,
-      }}
-    />
-  );
+        s.border1,
+        s.borderGray300,
+        s.bgWhite,
+        {
+          overflow: 'hidden',
+          zIndex: 10 - index,
+          marginRight: -42,
+        }
+      ]}>
+      <Image
+        style={{
+          height: 75,
+          width: 75
+        }}
+        source={{
+          uri: url,
+        }}
+      />
+    </View>
+  )
 };
 
 export default function WorkoutCard({ workout }: { workout: IWorkout }) {
@@ -50,7 +55,7 @@ export default function WorkoutCard({ workout }: { workout: IWorkout }) {
 
       {workout.exercises && (
         <View style={[s.flexRow, s.itemsCenter, s.mt6]}>
-          {workout.exercises.map((exercise, index) => {
+          {workout.exercises.slice(0, 3).map((exercise, index) => {
             return (
               <ExercisePreview
                 key={exercise.id}
@@ -59,6 +64,21 @@ export default function WorkoutCard({ workout }: { workout: IWorkout }) {
               />
             );
           })}
+
+          <View
+            style={[
+              {
+                height: 75,
+                width: 75,
+                marginLeft: 24
+              },
+              s.radius6,
+              s.bgGray100,
+              s.itemsCenter,
+              s.justifyCenter
+            ]}>
+            <Text style={[s.bold, s.text4XL, s.textGray400]}>{workout.exercises.length - 2}</Text>
+          </View>
         </View>
       )}
 

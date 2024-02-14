@@ -59,15 +59,7 @@ const workouts = [
     id: "2",
     title: "Treino B",
     exercises: [
-      {
-        id: "2363",
-        bodyPart: "peito",
-        equipment: "peso do corpo",
-        gifUrl:
-          "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_2363.gif",
-        name: "mergulho de peito com pegada larga em barras paralelas altas",
-        target: "peitoral",
-      },
+      
       {
         id: "0858",
         bodyPart: "core",
@@ -128,15 +120,7 @@ const workouts = [
         name: "sprints de vento",
         target: "abdômen",
       },
-      {
-        id: "1604",
-        bodyPart: "quadriceps/posterior",
-        equipment: "peso do corpo",
-        gifUrl:
-          "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1604.gif",
-        name: "alongamento do maior do mundo",
-        target: "isquiotibiais",
-      },
+     
       {
         id: "1428",
         bodyPart: "antebraço",
@@ -198,6 +182,24 @@ const workouts = [
         target: "antebraços",
       },
       {
+        id: "1428",
+        bodyPart: "antebraço",
+        equipment: "peso do corpo",
+        gifUrl:
+          "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
+        name: "círculos de pulso",
+        target: "antebraços",
+      },
+      {
+        id: "1428",
+        bodyPart: "antebraço",
+        equipment: "peso do corpo",
+        gifUrl:
+          "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
+        name: "círculos de pulso",
+        target: "antebraços",
+      },
+      {
         id: "0859",
         bodyPart: "antebraço",
         equipment: "anilha",
@@ -218,7 +220,7 @@ export default function WorkoutsList() {
       horizontal
       contentContainerStyle={[s.gap6]}
       showsHorizontalScrollIndicator={false}
-      snapToInterval={CARD_WIDTH}
+      snapToInterval={CARD_WIDTH - 12}
       data={workouts}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <WorkoutCard workout={item} />}

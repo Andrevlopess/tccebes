@@ -17,6 +17,7 @@ import { useCallback } from "react";
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { AppState } from "react-native";
 import { supabase } from "@/lib/supabase";
+import { s } from "@/styles/globals";
 
 export default function RootLayout() {
 
@@ -57,6 +58,7 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
+      <StatusBar translucent barStyle={"dark-content"} />
       <SafeAreaView onLayout={onLayoutRootView} style={styles.AndroidSafeArea}>
         <Slot />
       </SafeAreaView>
@@ -67,7 +69,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   AndroidSafeArea: {
     flex: 1,
-    backgroundColor: "white",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   }
 });
