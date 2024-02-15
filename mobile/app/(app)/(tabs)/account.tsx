@@ -1,36 +1,21 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, Pressable, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { useAuth } from "@/hooks/useAuth";
 import { s } from "@/styles/globals";
 import { LogOut } from "lucide-react-native";
+import { ViewTabs } from "@/components/ui/ViewTabs";
+import LoginForm from "@/components/LoginForm";
+import SignUpForm from "@/components/SignUpForm";
+import Modal from "@/components/ui/Modalize";
+import { useModalize } from "react-native-modalize";
 
 export default function AccountPage() {
-  const [isLoading, setIsLoading] = useState<boolean>();
-
-  const { signOut } = useAuth();
-
-  async function handleSignOut() {
-    try {
-      setIsLoading(true);
-      await signOut();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { open, close, ref } = useModalize();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 12,
-      }}
-    >
-      <TouchableOpacity
+    <View style={[s.container]}>
+      {/* <TouchableOpacity
         onPress={handleSignOut}
         style={[
           s.bgViolet600,
@@ -50,7 +35,34 @@ export default function AccountPage() {
             <Text style={[s.textGray50, s.semibold]}>Logout</Text>
           </>
         )}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      {/* <Modal /> */}
+      {/* <ViewTabs
+        screens={[
+          { key: "firsadfst", title: "Fir122asdasst" },
+          { key: "sesdfcond", title: "Se11111cond" },
+        ]}
+        // sceneMap={{ 
+        //   first: () => <View style={{ flex: 1, backgroundColor: "#3ff3" }} />,
+        //    second: () => <View style={{ flex: 1, backgroundColor: "#3f3" }} />}}
+      /> */}
+      {/* <ModalizeModal/> */}
+      <Pressable onPress={() => open()}>
+        <Text>open</Text>
+      </Pressable>
+
+      <Modal
+        childrenStyle={[s.flex1]}
+        modalStyle={[s.flex1]}
+        modalTopOffset={100}
+        ref={ref}
+      >
+        <View style={[s.flex1, s.bgAmber100, s.itemsCenter, s.justifyCenter]}>
+          <Pressable onPress={() => close()}>
+            <Text>vlose</Text>
+          </Pressable>
+        </View>
+      </Modal>
     </View>
   );
 }

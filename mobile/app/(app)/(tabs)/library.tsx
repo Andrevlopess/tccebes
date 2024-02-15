@@ -203,61 +203,63 @@ export default function LibraryPage() {
     <View style={[s.container, s.bgSnowWhite, s.gap24]}>
       <Text style={[s.bold, s.textXL]}>Biblioteca</Text>
 
-      <IconInput
-        placeholder="Busque por um exercício"
-        icon={<Search />}
-      />
+      <View style={[s.gap12]}>
+        <IconInput
+          placeholder="Busque por um exercício"
+          icon={<Search />}
+        />
 
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={[s.gap12]}
-        style={{ flexGrow: 0 }}
-        data={badges}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          const active = activesBadges.includes(item.id);
-          return (
-            // <Animated.View style={{ width: badgeWidth }}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => {
-                active
-                  ? setActivesBadges(
-                      activesBadges.filter((active) => active !== item.id)
-                    )
-                  : setActivesBadges((prev) => [...prev, item.id]);
-              }}
-            >
-              <Badge
-                style={[
-                  active ? s.bgViolet600 : s.bgWhite,
-                  s.flexRow,
-                  s.gap4,
-                  s.itemsCenter,
-                ]}
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={[s.gap12]}
+          style={{ flexGrow: 0 }}
+          data={badges}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => {
+            const active = activesBadges.includes(item.id);
+            return (
+              // <Animated.View style={{ width: badgeWidth }}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {
+                  active
+                    ? setActivesBadges(
+                        activesBadges.filter((active) => active !== item.id)
+                      )
+                    : setActivesBadges((prev) => [...prev, item.id]);
+                }}
               >
-                {active && (
-                  <Check
-                    color="#fff"
-                    size={16}
-                  />
-                )}
-                <Text
+                <Badge
                   style={[
-                    active && s.textWhite,
-                    s.regular,
-                    { textTransform: "capitalize" },
+                    active ? s.bgViolet600 : s.bgWhite,
+                    s.flexRow,
+                    s.gap4,
+                    s.itemsCenter,
                   ]}
                 >
-                  {item.target}
-                </Text>
-              </Badge>
-            </TouchableOpacity>
-            // </Animated.View>
-          );
-        }}
-      />
+                  {active && (
+                    <Check
+                      color="#fff"
+                      size={16}
+                    />
+                  )}
+                  <Text
+                    style={[
+                      active && s.textWhite,
+                      s.regular,
+                      { textTransform: "capitalize" },
+                    ]}
+                  >
+                    {item.target}
+                  </Text>
+                </Badge>
+              </TouchableOpacity>
+              // </Animated.View>
+            );
+          }}
+        />
+      </View>
 
       <View style={[s.flex1, s.gap8]}>
         {/* <Text style={[s.medium, s.textLG]}>
@@ -266,7 +268,7 @@ export default function LibraryPage() {
         </Text> */}
 
         <FlatList
-          contentContainerStyle={[s.gap12]}
+          contentContainerStyle={[s.gap4]}
           data={results}
           renderItem={({ item }) => <ExerciseCard {...item} />}
         />

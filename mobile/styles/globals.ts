@@ -3474,9 +3474,8 @@ export const s = StyleSheet.create({
     backgroundColor: "#F5F6FA",
   },
 
-
   screenWidth: {
-    width: Dimensions.get("screen").width,
+    width: Dimensions.get('screen').width
   },
 
   container: {
@@ -3486,3 +3485,7 @@ export const s = StyleSheet.create({
     backgroundColor: '#ffffff',
   }
 });
+
+
+// screen width - container padding
+export const containerWidth = Dimensions.get('screen').width - 28

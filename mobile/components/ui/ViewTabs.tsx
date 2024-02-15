@@ -1,101 +1,94 @@
-import { s } from "@/styles/globals";
+import { containerWidth, s } from "@/styles/globals";
 import { useEffect, useRef, useState } from "react";
 import Animated, {
-  useAnimatedStyle,
   useSharedValue,
-  withSpring,
-  interpolate,
-  Extrapolate,
+  withTiming,
 } from "react-native-reanimated";
 import {
   View,
   useWindowDimensions,
   TouchableOpacity,
-  Easing,
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 
-const FirstRoute = () => <View style={{ flex: 1, backgroundColor: "#333" }} />;
+
+const FirstRoute = () => <View style={{ flex: 1, backgroundColor: "#3ff3" }} />;
 
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: "#666" }} />;
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
+interface ViewTabsProps {
+  screens: {
+    key: string;
+    title: string;
+  }[],
+  sceneMap?: {
+    [key: string]: React.ComponentType
+  }
+}
 
-export const ViewTabs = () => {
+export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
   const layout = useWindowDimensions();
-
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: "first", title: "First" },
-    { key: "second", title: "Second" },
-  ]);
 
-
-  const indicatorX = useSharedValue(0);
-
-  console.log(indicatorX);
+  const [routes] = useState(screens);
+  // console.log(routes, screens);
   
-  const inputRange = routes.map((_, i) => i);
 
-  const indicatorStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateX: interpolate(indicatorX.value, inputRange, [
-            0,
-            layout.width / routes.length,
-          ]),
-        },
-      ],
-    };
-  });
+  const translateX = useSharedValue(0);
+  const handleChangeTab = () => {
+    translateX.value = withTiming((containerWidth / routes.length) * index);
+  };
+  useEffect(handleChangeTab, [index]);
 
   return (
     <TabView
       navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={(i) => {
-        setIndex(i);
-        indicatorX.value = withSpring(i, { stiffness: 100, damping: 20 });
-  console.log(indicatorX);
-
-      }}
+      renderScene={SceneMap({
+        first: FirstRoute,
+        second: SecondRoute,
+      })}
+      onIndexChange={setIndex}
+      style={[s.gap12]}
       initialLayout={{ width: layout.width }}
       renderTabBar={(props) => {
         return (
           <View
-            style={[s.flexRow, s.bgWhite, s.radius12, { position: "relative" }]}
+            style={[
+              { position: "relative" },
+              s.flexRow,
+              s.bgSnowWhite,
+              s.radius6,
+            ]}
           >
             <Animated.View
               style={[
-                s.bgRed300,
                 {
-                  height: 2,
-                  width: layout.width / routes.length,
+                  height: "100%",
+                  width: containerWidth / routes.length,
                   position: "absolute",
+                  transform: [{ translateX }],
                 },
-                indicatorStyle,
+                s.bgViolet600,
+                s.radius6,
               ]}
             />
 
             {props.navigationState.routes.map((route, i) => {
-              const opacity = props.position.interpolate({
-                inputRange,
-                outputRange: inputRange.map((inputIndex) =>
-                  inputIndex === i ? 1 : 0.5
-                ),
-              });
 
+              console.log(route);
+              
               return (
                 <TouchableOpacity
                   key={route.key}
-                  style={[s.flex1, s.itemsCenter, s.p16]}
+                  style={[s.flex1, s.itemsCenter, s.px12, s.py8]}
                   onPress={() => setIndex(i)}
                 >
-                  <Animated.Text style={{ opacity }}>
+                  <Animated.Text
+                    style={[
+                      s.medium,
+                      i === index ? s.textWhite : s.textGray800,
+                    ]}
+                  >
                     {route.title}
                   </Animated.Text>
                 </TouchableOpacity>

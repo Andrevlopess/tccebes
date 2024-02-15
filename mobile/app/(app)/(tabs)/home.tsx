@@ -37,6 +37,7 @@ const HomePage = () => {
         <Text style={[s.semibold, s.textBase, s.px4]}>Meus treinos</Text>
         <WorkoutsList />
       </View>
+
     </View>
   );
 };

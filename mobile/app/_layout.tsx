@@ -14,13 +14,19 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 import { useCallback } from "react";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import {
+  Platform,
+  SafeAreaView,
+  Text,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
 import { AppState } from "react-native";
 import { supabase } from "@/lib/supabase";
-import { s } from "@/styles/globals";
+import { gestureHandlerRootHOC } from "react-native-gesture-handler";
+import { Host } from "react-native-portalize";
 
-export default function RootLayout() {
-
+function RootLayout() {
   // Tells Supabase Auth to continuously refresh the session automatically if
   // the app is in the foreground. When this is added, you will continue to receive
   // `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
@@ -32,7 +38,6 @@ export default function RootLayout() {
       supabase.auth.stopAutoRefresh();
     }
   });
-
 
   let [fontsLoaded, fontError] = useFonts({
     Inter_100Thin,
@@ -57,10 +62,18 @@ export default function RootLayout() {
   }
 
   return (
+    // <Text>
+    //   andrelvopes
+    // </Text>
     <AuthProvider>
-      <StatusBar translucent barStyle={"dark-content"} />
-      <SafeAreaView onLayout={onLayoutRootView} style={styles.AndroidSafeArea}>
-        <Slot />
+      <StatusBar translucent barStyle={"dark-content"}/>
+      <SafeAreaView
+        onLayout={onLayoutRootView}
+        style={styles.AndroidSafeArea}
+      >
+        <Host>
+         <Slot/>
+        </Host>
       </SafeAreaView>
     </AuthProvider>
   );
@@ -69,6 +82,8 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   AndroidSafeArea: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-  }
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
 });
+
+export default gestureHandlerRootHOC(RootLayout)
