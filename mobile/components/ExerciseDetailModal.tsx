@@ -1,81 +1,69 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
-
+import { s } from "@/styles/globals";
+import React, { useState } from "react";
+import { Text, Image, View, StyleSheet } from "react-native";
+import Modal from "./ui/Modalize";
+import { IExercise } from "@/types/exercise";
 
 interface ModalProps {
-    visible: boolean;
-    setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  close: (dest?: "alwaysOpen" | "default" | undefined) => void;
+  open: (dest?: "default" | "top" | undefined) => void;
+  modalRef: any;
+  exercise: IExercise;
 }
 
-const ExerciseDetailModal = ({visible, setVisible}: ModalProps) => {
+const ExerciseDetailModal = ({
+  modalRef,
+  close,
+  open,
+  exercise,
+}: ModalProps) => {
+
+  const [imageSize, setImageSize] = useState<number>(0);
+
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={visible}
-        style={{}}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setVisible(!visible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setVisible(!visible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
+    <Modal
+      modalStyle={[s.flex1, s.radius12]}
+      handlePosition="inside"
+      snapPoint={550}
+      modalTopOffset={25}
+      ref={modalRef}
+      openAnimationConfig={{
+        spring: { friction: 15, tension: 24 },
+        timing: { duration: 280 },
+      }}
+      HeaderComponent={
+        <View style={[
+          s.mt24,
+           s.justifyBetween, 
+           s.flexRow,
+          s.borderGray200,
+          {borderBottomWidth: StyleSheet.hairlineWidth}
+        ]}>
+          <Text style={[s.bold, s.p12, s.textLG, s.textCapitalize]}>
+            {exercise.name}
+          </Text>
         </View>
-      </Modal>
-    </View>
+      }
+    >
+      <View
+        style={[s.flex1]}
+        onLayout={({ nativeEvent }) => { 
+          setImageSize(nativeEvent.layout.width);
+        }}
+      >
+        <View style={[s.p12, s.bgWhite]}>
+          <Image
+            style={{maxHeight: 600}}
+            source={{
+              uri: exercise.gifUrl,
+              width: imageSize - 24,
+              height: imageSize - 24,
+            }}
+          />
+        </View>
+      </View>
+    </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-});
 
 export default ExerciseDetailModal;

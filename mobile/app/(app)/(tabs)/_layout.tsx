@@ -4,6 +4,7 @@ import TabHome from "@/assets/icons/TabHome";
 import TabAccount from "@/assets/icons/TabAccount";
 import TabLibrary from "@/assets/icons/TabLibrary";
 import { Host } from "react-native-portalize";
+import { s } from "@/styles/globals";
 
 export default function TabLayout() {
   return (

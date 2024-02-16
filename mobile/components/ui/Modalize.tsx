@@ -14,7 +14,7 @@ const Modal: ForwardRefRenderFunction<Modalize, CustomModalProps> = (
   return (
     <Portal>
       <Modalize
-      hei
+       
         ref={ref}
         {...props}
       >

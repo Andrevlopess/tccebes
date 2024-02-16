@@ -17,6 +17,9 @@ export const s = StyleSheet.create({
   justifyBetween: {
     justifyContent: "space-between",
   },
+  justifyEnd: {
+    justifyContent: "flex-end",
+  },
   itemsCenter: {
     alignItems: "center",
   },
@@ -1101,6 +1104,9 @@ export const s = StyleSheet.create({
   },
   textUnderline: {
     textDecorationLine: 'underline',
+  },
+  textCapitalize: {
+    textTransform: 'capitalize'
   },
 
   // Display
@@ -3482,7 +3488,7 @@ export const s = StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     paddingHorizontal: 14,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#F5F6FA',
   }
 });
 

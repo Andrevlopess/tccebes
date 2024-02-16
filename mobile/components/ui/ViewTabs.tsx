@@ -1,52 +1,52 @@
 import { containerWidth, s } from "@/styles/globals";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Animated, {
   useSharedValue,
-  withTiming,
+  withSpring,
 } from "react-native-reanimated";
-import {
-  View,
-  useWindowDimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, useWindowDimensions, TouchableOpacity } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
-
-
-const FirstRoute = () => <View style={{ flex: 1, backgroundColor: "#3ff3" }} />;
-
-const SecondRoute = () => <View style={{ flex: 1, backgroundColor: "#666" }} />;
 
 interface ViewTabsProps {
   screens: {
     key: string;
     title: string;
-  }[],
-  sceneMap?: {
-    [key: string]: React.ComponentType
-  }
+  }[];
+  sceneMap: {
+    [key: string]: React.ComponentType;
+  };
 }
+
+
+const PADDING = 14;
 
 export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
-
+  const [dimensions, setDimensions] = useState<number>(0);
   const [routes] = useState(screens);
-  // console.log(routes, screens);
-  
 
   const translateX = useSharedValue(0);
+
   const handleChangeTab = () => {
-    translateX.value = withTiming((containerWidth / routes.length) * index);
+    translateX.value = withSpring(
+      (containerWidth / routes.length) * index + PADDING / 2,
+      {
+      duration: 250,
+      dampingRatio: 3,
+      stiffness: 500,
+      overshootClamping: false,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01
+    });
   };
   useEffect(handleChangeTab, [index]);
 
   return (
     <TabView
       navigationState={{ index, routes }}
-      renderScene={SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-      })}
+      renderScene={SceneMap(sceneMap)}
+      swipeEnabled={false}
       onIndexChange={setIndex}
       style={[s.gap12]}
       initialLayout={{ width: layout.width }}
@@ -56,37 +56,37 @@ export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
             style={[
               { position: "relative" },
               s.flexRow,
-              s.bgSnowWhite,
+              s.bgWhite,
               s.radius6,
             ]}
+            onLayout={({nativeEvent}) => setDimensions(nativeEvent.layout.height)}
           >
             <Animated.View
               style={[
                 {
-                  height: "100%",
-                  width: containerWidth / routes.length,
+                  height: "80%",
+                  top: PADDING / 3,
+                  width: (containerWidth / routes.length) - PADDING,
                   position: "absolute",
                   transform: [{ translateX }],
                 },
-                s.bgViolet600,
+                s.bgViolet200,
                 s.radius6,
               ]}
             />
 
             {props.navigationState.routes.map((route, i) => {
-
-              console.log(route);
-              
               return (
                 <TouchableOpacity
                   key={route.key}
-                  style={[s.flex1, s.itemsCenter, s.px12, s.py8]}
+                  activeOpacity={0.8}
+                  style={[s.flex1, s.itemsCenter, {padding: PADDING}]}
                   onPress={() => setIndex(i)}
                 >
                   <Animated.Text
                     style={[
-                      s.medium,
-                      i === index ? s.textWhite : s.textGray800,
+                      s.bold,
+                      i === index ? s.textViolet700 : s.textGray800,
                     ]}
                   >
                     {route.title}

@@ -41,27 +41,29 @@ export default function AuthProvider({
   }, []);
 
   useEffect(() => {
-    session && session.user
-      ? router.replace("/(app)/(tabs)/home")
-      : router.replace("/(auth)/");
+    // session && session.user
+    //   ? router.replace("/(app)/(tabs)/home")
+    //   : router.replace("/(auth)/");
 
-    console.log("signed in", session);
+    router.replace("/(app)/(tabs)/home")
   }, [session]);
 
   async function signInWithEmail({ email, password }: signInWithEmailType) {
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
-      
     });
 
     if (error) return error;
   }
 
-  async function signUpWithEmail({ username, email, password }: signUpWithEmailType) {
-
+  async function signUpWithEmail({
+    username,
+    email,
+    password,
+  }: signUpWithEmailType) {
     console.log(username);
-    
+
     const {
       data: { session },
       error,
@@ -71,8 +73,8 @@ export default function AuthProvider({
       options: {
         data: {
           username: username,
-        }
-      }
+        },
+      },
     });
 
     if (error) return error;

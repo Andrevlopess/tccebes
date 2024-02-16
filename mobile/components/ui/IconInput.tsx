@@ -10,8 +10,6 @@ interface IIconInputProps extends TextInputProps {
 const IconInput = ({
   icon,
   iconPosition = "left",
-  value,
-  onChangeText,
   ...props
 }: IIconInputProps) => {
   return (
