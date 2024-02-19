@@ -55,7 +55,7 @@ const ExerciseDetailModal = ({
           <Image
             style={{maxHeight: 600}}
             source={{
-              uri: exercise.gifUrl,
+              uri: exercise.gifurl,
               width: imageSize - 24,
               height: imageSize - 24,
             }}

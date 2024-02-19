@@ -23,7 +23,6 @@ const PADDING = 14;
 export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
-  const [dimensions, setDimensions] = useState<number>(0);
   const [routes] = useState(screens);
 
   const translateX = useSharedValue(0);
@@ -42,6 +41,9 @@ export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
   };
   useEffect(handleChangeTab, [index]);
 
+  console.log();
+  
+
   return (
     <TabView
       navigationState={{ index, routes }}
@@ -49,17 +51,16 @@ export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
       swipeEnabled={false}
       onIndexChange={setIndex}
       style={[s.gap12]}
-      initialLayout={{ width: layout.width }}
+      initialLayout={{ width: layout.width}}
       renderTabBar={(props) => {
         return (
           <View
             style={[
               { position: "relative" },
               s.flexRow,
-              s.bgWhite,
+              s.bgWhite, 
               s.radius6,
             ]}
-            onLayout={({nativeEvent}) => setDimensions(nativeEvent.layout.height)}
           >
             <Animated.View
               style={[

@@ -1,8 +1,8 @@
 export interface IExercise {
     id: string;
-    bodyPart: string;
+    bodypart: string;
     equipment: string;
-    gifUrl: string;
+    gifurl: string;
     name: string;
     target: string;
   }
