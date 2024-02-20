@@ -31,12 +31,12 @@ export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
     translateX.value = withSpring(
       (containerWidth / routes.length) * index + PADDING / 2,
       {
-      duration: 250,
-      dampingRatio: 3,
-      stiffness: 500,
-      overshootClamping: false,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01
+        duration: 1000,
+        dampingRatio: 0.7,
+        stiffness: 100,
+        overshootClamping: false,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 2,
     });
   };
   useEffect(handleChangeTab, [index]);

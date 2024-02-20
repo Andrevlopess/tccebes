@@ -10,45 +10,45 @@ const workouts = [
     exercises: [
       {
         id: "2363",
-        bodyPart: "peito",
+        bodypart: "peito",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_2363.gif",
         name: "mergulho de peito com pegada larga em barras paralelas altas",
         target: "peitoral",
       },
       {
         id: "0858",
-        bodyPart: "core",
+        bodypart: "core",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0858.gif",
         name: "sprints de vento",
         target: "abdômen",
       },
       {
         id: "1604",
-        bodyPart: "quadriceps/posterior",
+        bodypart: "quadriceps/posterior",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1604.gif",
         name: "alongamento do maior do mundo",
         target: "isquiotibiais",
       },
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "0859",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "anilha",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0859.gif",
         name: "rolo de pulso",
         target: "antebraços",
@@ -62,36 +62,36 @@ const workouts = [
       
       {
         id: "0858",
-        bodyPart: "core",
+        bodypart: "core",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0858.gif",
         name: "sprints de vento",
         target: "abdômen",
       },
       {
         id: "1604",
-        bodyPart: "quadriceps/posterior",
+        bodypart: "quadriceps/posterior",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1604.gif",
         name: "alongamento do maior do mundo",
         target: "isquiotibiais",
       },
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "0859",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "anilha",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0859.gif",
         name: "rolo de pulso",
         target: "antebraços",
@@ -104,18 +104,18 @@ const workouts = [
     exercises: [
       {
         id: "2363",
-        bodyPart: "peito",
+        bodypart: "peito",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_2363.gif",
         name: "mergulho de peito com pegada larga em barras paralelas altas",
         target: "peitoral",
       },
       {
         id: "0858",
-        bodyPart: "core",
+        bodypart: "core",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0858.gif",
         name: "sprints de vento",
         target: "abdômen",
@@ -123,18 +123,18 @@ const workouts = [
      
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "0859",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "anilha",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0859.gif",
         name: "rolo de pulso",
         target: "antebraços",
@@ -147,63 +147,63 @@ const workouts = [
     exercises: [
       {
         id: "2363",
-        bodyPart: "peito",
+        bodypart: "peito",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_2363.gif",
         name: "mergulho de peito com pegada larga em barras paralelas altas",
         target: "peitoral",
       },
       {
         id: "0858",
-        bodyPart: "core",
+        bodypart: "core",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0858.gif",
         name: "sprints de vento",
         target: "abdômen",
       },
       {
         id: "1604",
-        bodyPart: "quadriceps/posterior",
+        bodypart: "quadriceps/posterior",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1604.gif",
         name: "alongamento do maior do mundo",
         target: "isquiotibiais",
       },
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "1428",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "peso do corpo",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_1428.gif",
         name: "círculos de pulso",
         target: "antebraços",
       },
       {
         id: "0859",
-        bodyPart: "antebraço",
+        bodypart: "antebraço",
         equipment: "anilha",
-        gifUrl:
+        gifurl:
           "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0859.gif",
         name: "rolo de pulso",
         target: "antebraços",

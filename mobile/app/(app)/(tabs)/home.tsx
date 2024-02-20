@@ -1,7 +1,9 @@
 import WorkoutsList from "@/components/WorkoutsList";
+import Skeleton from "@/components/ui/Skeleton";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase";
 import { s } from "@/styles/globals";
+import { Link } from "expo-router";
 import { View, Text } from "react-native";
 
 const workouts = [
@@ -14,14 +16,6 @@ const workouts = [
 
 const HomePage = () => {
   const { session } = useAuth();
-
-  const getfiles = async () => {
-    const { data, error } = await supabase.storage
-      .from("exercises-demos")
-      .list("", { limit: 1500 });
-
-    console.log(data);
-  };
 
   // useEffect(() => {
   //   getfiles();
@@ -38,6 +32,10 @@ const HomePage = () => {
         <WorkoutsList />
       </View>
 
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Home Screen</Text>
+        <Link href="/modal">Present modal</Link>
+      </View>
     </View>
   );
 };

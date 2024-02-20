@@ -5,7 +5,7 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
-  Alert,
+  RefreshControl,
 } from "react-native";
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { s } from "@/styles/globals";
@@ -16,23 +16,38 @@ import { IExercise } from "@/types/exercise";
 import Badge from "@/components/ui/Badge";
 import { supabase } from "@/lib/supabase";
 import { isLoading } from "expo-font";
+import { useDebounce } from "@/hooks/useDebounceCallback";
+import Skeleton from "./ui/Skeleton";
 
-const ITEMS_PER_PAGE = 15;
-
+const ITEMS_PER_PAGE = 10;
 
 interface IExerciseListRenderProps {
-    renderFunction: () => {}
+  renderFunctionName: string;
+  params?: { [key: string]: string | undefined };
 }
 
-const ExerciseListRender = () => {
+const ExerciseListRender = ({
+  renderFunctionName,
+  params,
+}: IExerciseListRenderProps) => {
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<IExercise[]>([]);
   const [page, setPage] = useState<number>(0);
   const [hasListFinished, setHasListFinished] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  const fetchPage = async () => {
+  const debouncedSearchTerm = useDebounce(search, 500);
+
+  const fetchPage = async (
+    searchQuery: string,
+    resetItems: boolean = false
+  ) => {
+
+    
+    resetItems && setItems([]);
+
     if (loading || hasListFinished) return;
 
     setLoading(true);
@@ -40,38 +55,55 @@ const ExerciseListRender = () => {
 
     try {
       const { data: results, error } = await supabase
-        .rpc("get_exercises_by_name", { query: 'amem' })
-        .range(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE - 1);
+        .rpc(renderFunctionName, { query: searchQuery, ...params })
+        .range(
+          resetItems ? 0 : page * ITEMS_PER_PAGE,
+          (page + 1) * ITEMS_PER_PAGE - 1
+        );
 
       if (error) {
         throw new Error(error.message);
       }
 
+      console.log(results, hasListFinished);
+
+      if (!items && !results.length) console.log("query nao encontrada");
+      if (items && !results.length) console.log("end of the list");
+
       if (!results || results.length === 0) {
         setHasListFinished(true);
       } else {
-        setItems((prev) => [...prev, ...results]);
-        setPage((page) => page + 1);
+        setItems((prevItems) =>
+          resetItems ? [...results] : [...prevItems, ...results]
+        );
+        setPage((prevPage) => (resetItems ? 1 : prevPage + 1));
       }
     } catch (error) {
-      //   setError(error.message);
+      // setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPage();
-  }, []);
+    console.log(debouncedSearchTerm);
+    // When debouncedSearchTerm changes, fetch new data with search query
+    setHasListFinished(false);
+    fetchPage(debouncedSearchTerm, true);
+  }, [debouncedSearchTerm]);
+
+  const handleLoadMore = () => {
+    // Fetch next page of data when reaching the end of the list
+    fetchPage(debouncedSearchTerm);
+  };
 
   const renderItem = useCallback(
     ({ item }: { item: IExercise }) => <ExerciseCard exercise={item} />,
     []
   );
 
-  const renderLoadingList = () => {
-    if (loading) return <ActivityIndicator style={[s.py12]} />;
-    if (error) return <Text>Error: {error}</Text>;
+  const renderLoadingFooter = () => {
+    if (loading) return <ActivityIndicator />;
     return null;
   };
 
@@ -81,34 +113,44 @@ const ExerciseListRender = () => {
     </Text>
   );
 
-//   useEffect(() => {
-//     fetchPage(search);
-//   }, [search]);
-
-  const memoizedItemList = useMemo(
+  const memoizedList = useMemo(
     () => (
       <FlatList
         data={items}
         contentContainerStyle={[s.gap12]}
-        onEndReached={fetchPage}
-        onEndReachedThreshold={0.3}
-        ListFooterComponent={renderLoadingList}
-        ListEmptyComponent={renderEmptyList}
         renderItem={renderItem}
+        keyExtractor={(item, index) => `${item.id}-${index}`}
+        ListFooterComponent={renderLoadingFooter}
+        refreshing={refreshing}
+        onRefresh={() => fetchPage(debouncedSearchTerm, true)}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.1}
       />
     ),
-    [items, loading, hasListFinished, error]
+    [items, hasListFinished, loading, error]
   );
 
   return (
     <View style={[s.gap24, s.flex1]}>
       <IconInput
         icon={<Search />}
-        onChangeText={setSearch}
+        onChangeText={(text) => {
+          setSearch(text);
+        }}
         value={search}
         placeholder="Busque por um exercício"
       />
-      {memoizedItemList}
+      {loading && !items.length && (
+        <View style={[s.gap12]}>
+          {Array.from({ length: 15 }).map((_, index) => (
+            <Skeleton
+              height={90}
+              key={index}
+            />
+          ))}
+        </View>
+      )}
+      {items.length ? memoizedList : renderEmptyList()}
     </View>
   );
 };

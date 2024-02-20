@@ -18,6 +18,7 @@ import { supabase } from "@/lib/supabase";
 import { IExercise } from "@/types/exercise";
 import Badge from "@/components/ui/Badge";
 import ExerciseListRender from "@/components/ExercisesListRender";
+import { useAuth } from "@/hooks/useAuth";
 
 const badges = [
   {
@@ -27,19 +28,18 @@ const badges = [
 ];
 
 const LibraryScreen = () => {
-  return <ExerciseListRender />;
+  return <ExerciseListRender renderFunctionName="get_exercises_by_name" />;
 };
 
 const FavoritesScreen = () => {
+  const { session } = useAuth();
+
+  // todo replace session user_id
   return (
-    <View style={[s.gap24]}>
-      <View style={[s.gap12]}>
-        <IconInput
-          placeholder="Busque por um exercício"
-          icon={<Search />}
-        />
-      </View>
-    </View>
+    <ExerciseListRender
+      renderFunctionName="get_liked_exercises_by_user"
+      params={{ user_id: "84f13dde-923f-4aa7-a706-4d2810f12c3c" }}
+    />
   );
 };
 

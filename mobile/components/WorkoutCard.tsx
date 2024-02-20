@@ -13,6 +13,8 @@ interface IWorkout {
 const WIDTH = Dimensions.get("screen").width / 1.5;
 
 const ExercisePreview = ({ url, index }: { url: string; index: number }) => {
+  console.log(url);
+  
   return (
     <View
       style={[
@@ -62,10 +64,12 @@ export default function WorkoutCard({ workout }: { workout: IWorkout }) {
       {workout.exercises && (
         <View style={[s.flexRow, s.itemsCenter, s.mt6]}>
           {workout.exercises.slice(0, 3).map((exercise, index) => {
+            console.log(exercise.gifurl);
+            
             return (
               <ExercisePreview
                 key={exercise.id}
-                url={exercise.gifUrl}
+                url={exercise.gifurl}
                 index={index}
               />
             );
