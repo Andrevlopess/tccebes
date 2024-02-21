@@ -22,7 +22,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const badges = [
   {
-    id: "1",
+    id: "1 changing files",
     title: "basssdge1",
   },
 ];
