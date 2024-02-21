@@ -1,16 +1,16 @@
 import { View, Text, Image, Pressable, Animated } from "react-native";
-import React, { useState, useRef, LegacyRef } from "react";
+import React, { useState, useRef, LegacyRef, useEffect } from "react";
 import { s } from "@/styles/globals";
 import { IExercise } from "@/types/exercise";
 import { useModalize } from "react-native-modalize";
 import ExerciseDetailModal from "./ExerciseDetailModal";
-import { Swipeable } from "react-native-gesture-handler";
+import { Directions, Swipeable } from "react-native-gesture-handler";
 import { Heart } from "lucide-react-native";
 import handleLikeExercise from "@/supabase/like-exercise";
 import { router } from "expo-router";
 
 export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
-  // const { ref, open, close } = useModalize();
+  const { ref, open, close } = useModalize();
 
   let swipeable: Swipeable;
 
@@ -45,6 +45,7 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
     );
   };
 
+
   const renderLeftAction = (
     _progress: Animated.AnimatedInterpolation<number>,
     dragX: Animated.AnimatedInterpolation<number>
@@ -52,7 +53,7 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
     const scale = dragX.interpolate({
       inputRange: [0, 80],
       outputRange: [0, 1],
-      extrapolate: "clamp",
+      // extrapolate: "clamp",
     });
 
     return (
@@ -76,6 +77,7 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
   const handleSwipeableOpen = (direction: "left" | "right") => {
     switch (direction) {
       case "left":
+        console.log("like exercise");
         handleLikeExercise(exercise.id);
         swipeable?.close();
         break;
@@ -94,12 +96,14 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
         renderLeftActions={renderLeftAction}
         // renderRightActions={renderRightAction}
         onSwipeableOpen={handleSwipeableOpen}
-        leftThreshold={100}
+        overshootFriction={30}
+        // onSwipeableWillOpen={handleSwipeableOpen}
+        // onSwipeableWillClose={(direction) => {console.log('closing to', direction)}}
         // overshootLeft={false}
         overshootRight={false}
       >
         <Pressable
-          onPress={() => router.push('/(app)/amem')}
+          onPress={() => open()}
           style={[s.flexRow, s.gap12, s.px20, s.py10, s.bgWhite, s.radius12]}
         >
           <View style={[s.p12, s.justifyCenter, s.bgWhite]}>
@@ -133,12 +137,12 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
         </Pressable>
       </Swipeable>
 
-      {/* <ExerciseDetailModal
+      <ExerciseDetailModal
         exercise={exercise}
         modalRef={ref}
         close={close}
         open={open}
-      /> */}
+      />
     </>
   );
 }

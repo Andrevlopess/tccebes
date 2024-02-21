@@ -10,7 +10,7 @@ export default function RootLayout() {
         options={{ headerShown: false }}
       />
        <Stack.Screen
-        name="[id]"
+        name="exercises/[id]"
         options={{
          headerBackTitleVisible: false,
          headerTitle: 'Detalhes'

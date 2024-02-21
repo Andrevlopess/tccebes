@@ -111,11 +111,11 @@ const ExerciseDetailModal = ({
     <Modal
       modalStyle={[s.flex1, s.radius12]}
       handlePosition="inside"
-      snapPoint={550}
-      modalTopOffset={25}
+      // snapPoint={550}
+      modalTopOffset={0}
       ref={modalRef}
       openAnimationConfig={{
-        spring: { friction: 15, tension: 24 },
+        spring: { friction: 10, tension: 24 },
         timing: { duration: 280 },
       }}
       HeaderComponent={

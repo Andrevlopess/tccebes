@@ -67,9 +67,6 @@ const ExerciseListRender = ({
 
       console.log(results, hasListFinished);
 
-      if (!items && !results.length) console.log("query nao encontrada");
-      if (items && !results.length) console.log("end of the list");
-
       if (!results || results.length === 0) {
         setHasListFinished(true);
       } else {
@@ -107,6 +104,13 @@ const ExerciseListRender = ({
     return null;
   };
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchPage(debouncedSearchTerm, true);
+    setRefreshing(false);
+
+  }
+
   const renderEmptyList = () => (
     <Text style={[s.semibold, s.textCenter, s.textBase]}>
       No exercises found
@@ -122,7 +126,7 @@ const ExerciseListRender = ({
         keyExtractor={(item, index) => `${item.id}-${index}`}
         ListFooterComponent={renderLoadingFooter}
         refreshing={refreshing}
-        onRefresh={() => fetchPage(debouncedSearchTerm, true)}
+        onRefresh={handleRefresh}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.1}
       />
