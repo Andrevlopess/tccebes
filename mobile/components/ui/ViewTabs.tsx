@@ -38,8 +38,6 @@ export const ViewTabs = ({ screens, sceneMap }: ViewTabsProps) => {
         restDisplacementThreshold: 0.01,
         restSpeedThreshold: 2,
     });
-
-    
   };
 
   useEffect(handleChangeTab, [index]);

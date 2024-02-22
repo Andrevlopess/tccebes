@@ -15,7 +15,7 @@ import ExerciseCard from "@/components/ExerciseCard";
 import { ViewTabs } from "@/components/ui/ViewTabs";
 import debounce from "@/utils/debounce";
 import { supabase } from "@/lib/supabase";
-import { IExercise } from "@/types/exercise";
+import { IExercise, IUserExercise } from "@/types/exercise";
 import Badge from "@/components/ui/Badge";
 import ExerciseListRender from "@/components/ExercisesListRender";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,12 +32,14 @@ const badges = [
 const LibraryScreen = () => {
   const ITEMS_PER_PAGE = 10;
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState<IExercise[]>([]);
+  const [items, setItems] = useState<IUserExercise[]>([]);
   const [page, setPage] = useState<number>(0);
   const [hasListFinished, setHasListFinished] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
   const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  const { userId } = useAuth();
 
   const debouncedSearchTerm = useDebounce(search, 500);
 
@@ -45,8 +47,6 @@ const LibraryScreen = () => {
     searchQuery: string,
     resetItems: boolean = false
   ) => {
-
-    
     resetItems && setItems([]);
 
     if (loading || hasListFinished) return;
@@ -56,7 +56,7 @@ const LibraryScreen = () => {
 
     try {
       const { data: results, error } = await supabase
-        .rpc('get_exercises_by_name', { query: searchQuery })
+        .rpc("get_exercises_by_name", { user_id: userId, query: searchQuery })
         .range(
           resetItems ? 0 : page * ITEMS_PER_PAGE,
           (page + 1) * ITEMS_PER_PAGE - 1
@@ -96,7 +96,7 @@ const LibraryScreen = () => {
   };
 
   const renderItem = useCallback(
-    ({ item }: { item: IExercise }) => <ExerciseCard exercise={item} />,
+    ({ item }: { item: IUserExercise }) => <ExerciseCard exercise={item} />,
     []
   );
 
@@ -109,8 +109,7 @@ const LibraryScreen = () => {
     setRefreshing(true);
     await fetchPage(debouncedSearchTerm, true);
     setRefreshing(false);
-
-  }
+  };
 
   const renderEmptyList = () => (
     <Text style={[s.semibold, s.textCenter, s.textBase]}>
@@ -175,9 +174,9 @@ const FavoritesScreen = () => {
 export default function LibraryPage() {
   return (
     <View style={[s.container, s.bgSnowWhite, s.gap24]}>
-      <Text style={[s.bold, s.textXL]}>Biblioteca</Text>
-
-      <ViewTabs
+      <Text style={[s.bold, s.text2XL]}>Biblioteca</Text>
+      <LibraryScreen />
+      {/* <ViewTabs
         screens={[
           { key: "first", title: "Todos" },
           { key: "second", title: "Favoritos" },
@@ -186,7 +185,7 @@ export default function LibraryPage() {
           first: LibraryScreen,
           second: FavoritesScreen,
         }}
-      />
+      /> */}
     </View>
   );
 }

@@ -5,6 +5,9 @@ export const s = StyleSheet.create({
   flex1: {
     flex: 1,
   },
+  shrink1: {
+    flexShrink: 1
+  },
   flexRow: {
     flexDirection: "row",
   },

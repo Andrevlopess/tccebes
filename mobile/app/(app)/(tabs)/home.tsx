@@ -32,10 +32,7 @@ const HomePage = () => {
         <WorkoutsList />
       </View>
 
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-        <Link href="/modal">Present modal</Link>
-      </View>
+      
     </View>
   );
 };

@@ -26,6 +26,8 @@ import { supabase } from "@/lib/supabase";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { Host } from "react-native-portalize";
 
+SplashScreen.preventAutoHideAsync();
+
 function RootLayout() {
   // Tells Supabase Auth to continuously refresh the session automatically if
   // the app is in the foreground. When this is added, you will continue to receive
@@ -62,9 +64,6 @@ function RootLayout() {
   }
 
   return (
-    // <Text>
-    //   andrelvopes
-    // </Text>
     <AuthProvider>
       <StatusBar translucent barStyle={"dark-content"}/>
       <SafeAreaView

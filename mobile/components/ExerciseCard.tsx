@@ -1,15 +1,21 @@
 import { View, Text, Image, Pressable, Animated } from "react-native";
 import React, { useState, useRef, LegacyRef, useEffect } from "react";
 import { s } from "@/styles/globals";
-import { IExercise } from "@/types/exercise";
+import { IExercise, IUserExercise } from "@/types/exercise";
 import { useModalize } from "react-native-modalize";
 import ExerciseDetailModal from "./ExerciseDetailModal";
 import { Directions, Swipeable } from "react-native-gesture-handler";
-import { Heart } from "lucide-react-native";
+import { CheckCircle, Heart, ListPlus, PlusCircle } from "lucide-react-native";
 import handleLikeExercise from "@/supabase/like-exercise";
 import { router } from "expo-router";
 
-export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
+export default function ExerciseCard({
+  exercise,
+}: {
+  exercise: IUserExercise;
+}) {
+  const [isLiked, setIsLiked] = useState<boolean>(exercise.liked);
+
   const { ref, open, close } = useModalize();
 
   let swipeable: Swipeable;
@@ -17,8 +23,6 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
   const updateRef = (ref: Swipeable) => {
     swipeable = ref;
   };
-
-  const [liked, setLiked] = useState(false);
 
   const renderRightAction = (
     _progress: Animated.AnimatedInterpolation<number>,
@@ -45,7 +49,6 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
     );
   };
 
-
   const renderLeftAction = (
     _progress: Animated.AnimatedInterpolation<number>,
     dragX: Animated.AnimatedInterpolation<number>
@@ -53,7 +56,13 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
     const scale = dragX.interpolate({
       inputRange: [0, 80],
       outputRange: [0, 1],
-      // extrapolate: "clamp",
+      extrapolate: "clamp",
+    });
+
+    const translateX = dragX.interpolate({
+      inputRange: [0, 80],
+      outputRange: [-50, 0],
+      extrapolate: "clamp",
     });
 
     return (
@@ -61,15 +70,12 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
         style={[
           s.itemsCenter,
           s.justifyCenter,
-          { marginHorizontal: 24, transform: [{ scale }] },
+          { marginHorizontal: 24, transform: [{ scale }, {translateX}] },
         ]}
       >
-        <Pressable style={[s.radiusFull, s.bgRed100, s.p12]}>
-          <Heart
-            color={"#dc2626"}
-            fill={liked ? "#dc2626" : "transparent"}
-          />
-        </Pressable>
+        <View style={[s.radiusFull, s.bgGreen500, s.p12]}>
+         <ListPlus color="#fff" strokeWidth={2.5} />
+        </View>
       </Animated.View>
     );
   };
@@ -77,8 +83,10 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
   const handleSwipeableOpen = (direction: "left" | "right") => {
     switch (direction) {
       case "left":
-        console.log("like exercise");
-        handleLikeExercise(exercise.id);
+        // setIsLiked((prev) => !prev);
+        // handleLikeExercise(exercise.id);
+        
+        router.push("/(app)/(modals)/add-exercise-to");
         swipeable?.close();
         break;
       case "right":
@@ -116,7 +124,7 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
             />
           </View>
 
-          <View style={[s.p8, s.justifyBetween, { flexShrink: 1 }]}>
+          <View style={[s.p8, s.justifyBetween, s.flex1, { flexShrink: 1 }]}>
             <Text
               style={[s.semibold, s.flex1, { textTransform: "capitalize" }]}
             >
@@ -134,6 +142,11 @@ export default function ExerciseCard({ exercise }: { exercise: IExercise }) {
               {exercise.target}
             </Text>
           </View>
+          {isLiked && (
+            <View style={[s.itemsEnd, s.justifyEnd, s.py8]}>
+             <CheckCircle color={"#22c55e"} strokeWidth={2.4}/>
+            </View>
+          )}
         </Pressable>
       </Swipeable>
 

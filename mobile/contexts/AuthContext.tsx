@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { AuthError, Session } from "@supabase/supabase-js";
 
 interface IAuthContext {
+  userId: string | undefined;
   session: Session | null;
   signInWithEmail: (data: signInWithEmailType) => Promise<void | AuthError>;
   signUpWithEmail: (data: signUpWithEmailType) => Promise<void | AuthError>;
@@ -29,6 +30,7 @@ export default function AuthProvider({
 }) {
   const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
+  const [userId, setUserId] = useState<string | undefined>("84f13dde-923f-4aa7-a706-4d2810f12c3c");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -45,7 +47,8 @@ export default function AuthProvider({
     //   ? router.replace("/(app)/(tabs)/home")
     //   : router.replace("/(auth)/");
 
-    router.replace("/(app)/(tabs)/home")
+    router.replace("/(app)/(tabs)/library");
+    setUserId(session?.user.id  ?? '84f13dde-923f-4aa7-a706-4d2810f12c3c');
   }, [session]);
 
   async function signInWithEmail({ email, password }: signInWithEmailType) {
@@ -87,7 +90,7 @@ export default function AuthProvider({
 
   return (
     <AuthContext.Provider
-      value={{ session, signInWithEmail, signUpWithEmail, signOut }}
+      value={{ userId, session, signInWithEmail, signUpWithEmail, signOut }}
     >
       {children}
     </AuthContext.Provider>

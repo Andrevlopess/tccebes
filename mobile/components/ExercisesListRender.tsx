@@ -12,7 +12,7 @@ import { s } from "@/styles/globals";
 import IconInput from "@/components/ui/IconInput";
 import { Check, Search } from "lucide-react-native";
 import ExerciseCard from "@/components/ExerciseCard";
-import { IExercise } from "@/types/exercise";
+import { IExercise, IUserExercise } from "@/types/exercise";
 import Badge from "@/components/ui/Badge";
 import { supabase } from "@/lib/supabase";
 import { isLoading } from "expo-font";
@@ -31,7 +31,7 @@ const ExerciseListRender = ({
   params,
 }: IExerciseListRenderProps) => {
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState<IExercise[]>([]);
+  const [items, setItems] = useState<IUserExercise[]>([]);
   const [page, setPage] = useState<number>(0);
   const [hasListFinished, setHasListFinished] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -95,7 +95,7 @@ const ExerciseListRender = ({
   };
 
   const renderItem = useCallback(
-    ({ item }: { item: IExercise }) => <ExerciseCard exercise={item} />,
+    ({ item }: { item: IUserExercise }) => <ExerciseCard exercise={item} />,
     []
   );
 

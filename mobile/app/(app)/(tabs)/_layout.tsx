@@ -8,52 +8,50 @@ import { s } from "@/styles/globals";
 
 export default function TabLayout() {
   return (
-      <Tabs
-        initialRouteName="library"
-        screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: "#7c3aed",
+    <Tabs
+      initialRouteName="library"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#7c3aed",
+      }}
+    >
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, focused }) => (
+            <TabHome
+              color={color}
+              focused={focused}
+            />
+          ),
         }}
-      >
-        <Tabs.Screen
-          name="home"
-          options={{
-            title: "Home",
-            tabBarIcon: ({ color, focused }) => (
-              <TabHome
-                color={color}
-                focused={focused}
-              />
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="library"
-          options={{
-            title: "Library",
-            tabBarIcon: ({ color, focused }) => (
-              <TabLibrary
-                color={color}
-                focused={focused}
-              />
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="account"
-          options={{
-            title: "Account",
-            tabBarIcon: ({ color, focused }) => (
-              <TabAccount
-                color={color}
-                focused={focused}
-              />
-            ),
-          }}
-        />
-      </Tabs>
+      />
+      <Tabs.Screen
+        name="library"
+        options={{
+          title: "Library",
+          tabBarIcon: ({ color, focused }) => (
+            <TabLibrary
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "Account",
+          tabBarIcon: ({ color, focused }) => (
+            <TabAccount
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
