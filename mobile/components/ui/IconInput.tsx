@@ -15,7 +15,7 @@ const IconInput = ({
   return (
     <View
       style={[
-        s.radius12,
+        s.radius8,
         s.bgWhite,
         s.p12,
         s.gap4,

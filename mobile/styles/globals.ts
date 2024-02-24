@@ -6,7 +6,7 @@ export const s = StyleSheet.create({
     flex: 1,
   },
   shrink1: {
-    flexShrink: 1
+    flexShrink: 1,
   },
   flexRow: {
     flexDirection: "row",
@@ -1106,10 +1106,10 @@ export const s = StyleSheet.create({
     fontStyle: "italic",
   },
   textUnderline: {
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
   textCapitalize: {
-    textTransform: 'capitalize'
+    textTransform: "capitalize",
   },
 
   // Display
@@ -1121,7 +1121,6 @@ export const s = StyleSheet.create({
   },
 
   // Text Colors
-
 
   textWhite: {
     color: "#ffffff",
@@ -3383,23 +3382,21 @@ export const s = StyleSheet.create({
     borderColor: "#510a1a",
   },
 
-
   border0: {
-    borderWidth: 0
+    borderWidth: 0,
   },
   border1: {
-    borderWidth: 1
+    borderWidth: 1,
   },
   border2: {
-    borderWidth: 2
+    borderWidth: 2,
   },
   border3: {
-    borderWidth: 3
+    borderWidth: 3,
   },
   border4: {
-    borderWidth: 4
+    borderWidth: 4,
   },
-  
 
   // font sizes
   textXS: {
@@ -3484,17 +3481,80 @@ export const s = StyleSheet.create({
   },
 
   screenWidth: {
-    width: Dimensions.get('screen').width
+    width: Dimensions.get("screen").width,
+  },
+
+  shadow3: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.17,
+    shadowRadius: 2.54,
+    elevation: 3,
+  },
+
+  shadow4: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.17,
+    shadowRadius: 3.05,
+    elevation: 4,
+  },
+
+  shadow5: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 4.59,
+    elevation: 5,
+  },
+  shadow6: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.19,
+    shadowRadius: 5.62,
+    elevation: 6,
+  },
+
+  shadow8: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5.62,
+    elevation: 8,
+  },
+  shadow10: {
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.21,
+    shadowRadius: 7.68,
+    elevation: 10,
   },
 
   container: {
     flex: 1,
     paddingTop: 24,
     paddingHorizontal: 14,
-    backgroundColor: '#F5F6FA',
-  }
+    backgroundColor: "#F5F6FA",
+  },
 });
 
-
 // screen width - container padding
-export const containerWidth = Dimensions.get('screen').width - 28
+export const containerWidth = Dimensions.get("screen").width - 28;

@@ -9,11 +9,13 @@ import LoginForm from "@/components/LoginForm";
 import SignUpForm from "@/components/SignUpForm";
 import Modal from "@/components/ui/Modalize";
 import { useModalize } from "react-native-modalize";
+import NewWorkoutForm from "@/components/NewWorkoutForm";
  
 export default function AccountPage() {
   return (
     <View style={[s.container]}>
-     <Text>Account page</Text>
+      <NewWorkoutForm/>
+
     </View>
   );
 }

@@ -94,7 +94,7 @@ const FloatingLabelInput = ({
                     style={[
                         s.border1,
                         s.bgGray50,
-                        s.radius12,
+                        s.radius8,
                         s.p12,
                         !!error ? s.borderRed400 : s.borderGray300
                     ]}>

@@ -34,7 +34,6 @@ export default function SignUpForm() {
         email: string,
         password: string
     }) {
-        console.log('andre');
         
         try {
             console.log(username, email, password);

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { s } from "@/styles/globals";
 import { FlatList } from "react-native";
@@ -9,6 +9,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import { Image } from 'expo-image';
 
 interface IWorkoutListCard {
   id: string;
@@ -41,38 +42,31 @@ const WorkoutListCard = ({
 
   opacity.value = withTiming(selected ? 1 : 0);
 
+  const blurhash =
+  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => onSelect(id)}
       style={[
         s.flex1,
-        s.px24,
-        s.py12,
+        s.p12,
         s.flexRow,
         s.gap24,
         s.radius12,
         s.itemsCenter,
+        {paddingRight: 24}
       ]}
     >
       <Image
-        style={{
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.23,
-          shadowRadius: 2.62,
-        }}
-        source={{
-          uri:
-            image ??
-            "https://xjnbjevqrawvgiesutug.supabase.co/storage/v1/object/public/exercises-demos/exercise_0002.gif",
-          height: 50,
-          width: 50,
-        }}
+        style={[s.shadow4, {height: 50, width: 50}]}
+        source={image}
+        placeholder={blurhash}
+        contentFit="cover"
+        transition={500}
       />
+
       <View style={[s.flex1]}>
         <Text style={[s.semibold, s.textCapitalize, s.textBase]}>
           {title}
@@ -80,7 +74,7 @@ const WorkoutListCard = ({
         <Text
           style={[
             s.regular,
-            s.textGray300,
+            s.textGray500,
             s.textCapitalize,
             s.textSM,
             s.flex1,
@@ -104,6 +98,13 @@ export default function DisponibleWorkoutsList() {
 
   const workouts: Omit<IWorkoutListCard, "selected" | "onSelect">[] = [
     {
+      id: "10",
+      title: "Exercíos favoritos",
+      image: null,
+      alreadyAdded: false,
+      exercisesLength: 2,
+    },
+    {
       id: "1",
       title: "treino a",
       image: null,
@@ -119,6 +120,34 @@ export default function DisponibleWorkoutsList() {
     },
     {
       id: "3",
+      title: "treino b",
+      image: null,
+      alreadyAdded: false,
+      exercisesLength: 0,
+    },
+    {
+      id: "32",
+      title: "treino b",
+      image: null,
+      alreadyAdded: false,
+      exercisesLength: 0,
+    },
+    {
+      id: "321",
+      title: "treino b",
+      image: null,
+      alreadyAdded: false,
+      exercisesLength: 0,
+    },
+    {
+      id: "33",
+      title: "treino b",
+      image: null,
+      alreadyAdded: false,
+      exercisesLength: 0,
+    },
+    {
+      id: "3123",
       title: "treino b",
       image: null,
       alreadyAdded: false,
@@ -146,16 +175,22 @@ export default function DisponibleWorkoutsList() {
   }, [selectedWorkouts]);
 
   return (
-    <View style={[s.gap12]}>
-      <WorkoutListCard
-        id="favorite"
-        title="Exercícios Favoritos"
-        alreadyAdded
-        exercisesLength={100}
-        image="../../assets/images/LikedImage.png"
-        onSelect={handleSelectWorkout}
-        selected={true}
-      />
+    <View style={[s.gap12, s.mt24, {marginBottom: 42}]}>
+      
+      {/* <TouchableOpacity
+          style={[
+            s.bgViolet600,
+            s.radius6,
+            s.px36,
+            s.py12,
+            s.shadow6,
+          ]}
+        >
+          <Text style={[s.medium, s.textWhite, s.textCenter, s.textBase]}>
+            
+          </Text>
+        </TouchableOpacity> */}
+
 
       <FlatList
         contentContainerStyle={[s.py12, s.gap4, s.borderGray200, {borderTopWidth: 1 }]}

@@ -9,7 +9,7 @@ import { s } from "@/styles/globals";
 export default function TabLayout() {
   return (
     <Tabs
-      initialRouteName="library"
+      initialRouteName="account"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
